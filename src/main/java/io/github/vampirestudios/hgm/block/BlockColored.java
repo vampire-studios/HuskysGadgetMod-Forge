@@ -1,8 +1,7 @@
-package io.github.vampirestudios.hgm.blocks;
+package io.github.vampirestudios.hgm.block;
 
 import io.github.vampirestudios.hgm.HuskysGadgetMod;
-import net.minecraft.block.ContainerBlock;
-import net.minecraft.block.ITileEntityProvider;
+import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.DyeColor;
@@ -14,11 +13,11 @@ import net.minecraft.world.IBlockReader;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public abstract class BlockColoredModContainer extends ContainerBlock implements ITileEntityProvider, ColoredBlock {
+public class BlockColored extends Block implements ColoredBlock {
 
-    private DyeColor color;
+    public final DyeColor color;
 
-    public BlockColoredModContainer(String name, DyeColor color) {
+    public BlockColored(String name, DyeColor color) {
         super(Properties.create(Material.ROCK));
         this.color = color;
         this.setRegistryName(new ResourceLocation(HuskysGadgetMod.MOD_ID, name + "_" + color.getName()));
