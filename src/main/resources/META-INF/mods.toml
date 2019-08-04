@@ -1,0 +1,33 @@
+modLoader="javafml"
+loaderVersion="[28,)"
+issueTrackerURL="http://my.issue.tracker/"
+[[mods]]
+    modId="hgm"
+    version="0.1.0"
+    displayName="Husky's Gadget Mod - Forge"
+    displayURL="http://github.com/vampire-studios/HuskysGadgetMod-Forge"
+    logoFile="hgm_banner.png"
+    credits="Thanks to King of Creepers for the amazing models, and a lot thanks to Absolem too for the amazing app icons and banners and Etaris for some really nice textures"
+    authors="Vampire Studios"
+    description='''
+    This mod adds different working devices to minecraft like laptops, phones, tablets, playstations, monitors and a lot more + some funny easter eggs
+    '''
+
+[[dependencies.examplemod]] #optional
+    # the modid of the dependency
+    modId="forge" #mandatory
+    # Does this dependency have to exist - if not, ordering below must be specified
+    mandatory=true #mandatory
+    # The version range of the dependency
+    versionRange="[28,)" #mandatory
+    # An ordering relationship for the dependency - BEFORE or AFTER required if the relationship is not mandatory
+    ordering="NONE"
+    # Side this dependency is applied on - BOTH, CLIENT or SERVER
+    side="BOTH"
+# Here's another dependency
+[[dependencies.examplemod]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.14.4]"
+    ordering="NONE"
+    side="BOTH"
