@@ -1,4 +1,4 @@
-package io.github.vampirestudios.hgm.blocks;
+package io.github.vampirestudios.hgm.block;
 
 import io.github.vampirestudios.hgm.utils.IBlockColorProvider;
 import io.github.vampirestudios.hgm.utils.IItemColorProvider;

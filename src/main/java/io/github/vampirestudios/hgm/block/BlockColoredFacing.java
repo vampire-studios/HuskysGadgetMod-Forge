@@ -1,4 +1,4 @@
-package io.github.vampirestudios.hgm.blocks;
+package io.github.vampirestudios.hgm.block;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;

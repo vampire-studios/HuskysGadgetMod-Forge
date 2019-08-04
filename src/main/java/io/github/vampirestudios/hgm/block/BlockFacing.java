@@ -3,7 +3,7 @@
 // (powered by Fernflower decompiler)
 //
 
-package io.github.vampirestudios.hgm.blocks;
+package io.github.vampirestudios.hgm.block;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
@@ -12,20 +12,17 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.state.DirectionProperty;
 import net.minecraft.state.StateContainer;
+import net.minecraft.state.properties.BlockStateProperties;
 import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 public abstract class BlockFacing extends BlockModContainer {
-    public static final DirectionProperty FACING;
+    public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
 
     public BlockFacing(String name, Material materialIn) {
         super(name, materialIn);
-        this.setDefaultState(this.makeDefaultState());
-    }
-
-    public BlockState makeDefaultState() {
-        return this.stateContainer.getBaseState().with(FACING, Direction.NORTH);
+        this.setDefaultState(this.getDefaultState().with(FACING, Direction.NORTH));
     }
 
     @Override
@@ -64,7 +61,4 @@ public abstract class BlockFacing extends BlockModContainer {
         p_206840_1_.add(FACING);
     }
 
-    static {
-        FACING = DirectionProperty.create("facing", Direction.Plane.HORIZONTAL);
-    }
 }

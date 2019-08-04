@@ -3,7 +3,7 @@
 // (powered by Fernflower decompiler)
 //
 
-package io.github.vampirestudios.hgm.blocks;
+package io.github.vampirestudios.hgm.block;
 
 import io.github.vampirestudios.hgm.HuskysGadgetMod;
 import net.minecraft.block.Block;
