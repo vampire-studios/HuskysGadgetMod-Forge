@@ -1,5 +1,6 @@
 package io.github.vampirestudios.hgm.init;
 
+import io.github.vampirestudios.hgm.block.BlockEasterEgg;
 import io.github.vampirestudios.hgm.block.BlockServerTerminal;
 import io.github.vampirestudios.hgm.item.CustomBlockItem;
 import net.minecraft.block.Block;
@@ -13,10 +14,11 @@ import net.minecraftforge.fml.common.Mod;
 public class GadgetBlocks {
 
     public static final Block SERVER_TERMINAL = new BlockServerTerminal();
+    public static final Block EASTER_EGG = new BlockEasterEgg();
 
     @SubscribeEvent
     public static void onBlocksRegistry(final RegistryEvent.Register<Block> event) {
-        event.getRegistry().registerAll(SERVER_TERMINAL);
+        event.getRegistry().registerAll(SERVER_TERMINAL, EASTER_EGG);
     }
 
     @SubscribeEvent
