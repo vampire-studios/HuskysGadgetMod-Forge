@@ -1,5 +1,6 @@
 package io.github.vampirestudios.hgm.init;
 
+import io.github.vampirestudios.hgm.block.BlockEasterEgg;
 import io.github.vampirestudios.hgm.block.BlockElectricSecurityFence;
 import io.github.vampirestudios.hgm.block.BlockServerTerminal;
 import io.github.vampirestudios.hgm.item.CustomBlockItem;
@@ -15,10 +16,11 @@ public class GadgetBlocks {
 
     public static final Block SERVER_TERMINAL = new BlockServerTerminal();
     public static final Block ELECTRIC_SECURITY_FENCE = new BlockElectricSecurityFence();
+    public static final Block EASTER_EGG = new BlockEasterEgg();
 
     @SubscribeEvent
     public static void onBlocksRegistry(final RegistryEvent.Register<Block> event) {
-        event.getRegistry().registerAll(SERVER_TERMINAL);
+        event.getRegistry().registerAll(SERVER_TERMINAL, EASTER_EGG);
         event.getRegistry().registerAll(ELECTRIC_SECURITY_FENCE);
     }
 

@@ -5,11 +5,13 @@ import net.minecraft.block.BlockState;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.state.StateContainer;
+import net.minecraft.util.Direction;
 
 public class BlockServerTerminal extends BlockDevice {
 
     public BlockServerTerminal() {
-        super(Material.ANVIL, "server_terminal");
+        super(Material.ANVIL, "server_rack");
+        setDefaultState(getDefaultState().with(FACING, Direction.NORTH));
 //        this.setCreativeTab(HuskyGadgetMod.deviceDecoration);
     }
 
