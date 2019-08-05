@@ -9,4 +9,9 @@ public class BaseItem extends Item {
         super(new Properties().group(HuskysGadgetMod.deviceItems));
         this.setRegistryName(new ResourceLocation(HuskysGadgetMod.MOD_ID, name));
     }
+
+    public BaseItem(String name, Properties properties) {
+        super(properties.group(HuskysGadgetMod.deviceItems));
+        this.setRegistryName(new ResourceLocation(HuskysGadgetMod.MOD_ID, name));
+    }
 }
