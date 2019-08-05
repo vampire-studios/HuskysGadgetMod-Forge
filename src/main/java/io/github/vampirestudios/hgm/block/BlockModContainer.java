@@ -8,7 +8,6 @@ package io.github.vampirestudios.hgm.block;
 import io.github.vampirestudios.hgm.HuskysGadgetMod;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
@@ -16,7 +15,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.World;
 
-public abstract class BlockModContainer extends Block implements ITileEntityProvider {
+public abstract class BlockModContainer extends Block {
     public BlockModContainer(String name, Material materialIn) {
         super(Properties.create(materialIn));
         setRegistryName(new ResourceLocation(HuskysGadgetMod.MOD_ID, name));

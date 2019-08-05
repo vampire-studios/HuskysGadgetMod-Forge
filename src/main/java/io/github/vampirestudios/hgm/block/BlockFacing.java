@@ -1,8 +1,3 @@
-//
-// Source code recreated from a .class file by IntelliJ IDEA
-// (powered by Fernflower decompiler)
-//
-
 package io.github.vampirestudios.hgm.block;
 
 import net.minecraft.block.Block;
@@ -27,7 +22,7 @@ public abstract class BlockFacing extends BlockModContainer {
 
     @Override
     public void onBlockAdded(BlockState thisState, World world, BlockPos pos, BlockState state2, boolean idk) {
-        this.setDefaultFacing(world, pos, state2);
+        this.setDefaultFacing(world, pos, thisState);
     }
 
     public void onBlockPlacedBy(World worldIn, BlockPos pos, BlockState state, LivingEntity placer, ItemStack stack) {

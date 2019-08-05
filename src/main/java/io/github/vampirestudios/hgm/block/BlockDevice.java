@@ -8,7 +8,6 @@ import net.minecraft.block.material.Material;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.fluid.IFluidState;
 import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -73,9 +72,9 @@ public abstract class BlockDevice extends BlockFacing {
     }
 
     @Override
-    public boolean removedByPlayer(BlockState state, World world, BlockPos pos, PlayerEntity player, boolean willHarvest, IFluidState fluid) {
-        if (!world.isRemote && player.abilities.isCreativeMode) {
-            TileEntity tileEntity = world.getTileEntity(pos);
+    public void onBlockHarvested(World worldIn, BlockPos pos, BlockState state, PlayerEntity player) {
+        if (!worldIn.isRemote && player.abilities.isCreativeMode) {
+            TileEntity tileEntity = worldIn.getTileEntity(pos);
             if (tileEntity instanceof TileEntityDevice) {
                 TileEntityDevice device = (TileEntityDevice) tileEntity;
 
@@ -103,19 +102,13 @@ public abstract class BlockDevice extends BlockFacing {
                     drop.setDisplayName(new StringTextComponent(device.getCustomName()));
                 }
 
-                world.addEntity(new ItemEntity(world, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, drop));
+                worldIn.addEntity(new ItemEntity(worldIn, pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5, drop));
             }
         }
-        return super.removedByPlayer(state, world, pos, player, willHarvest, fluid);
     }
 
     void removeTagsForDrop(CompoundNBT tileEntityTag) {
-    }
 
-    @Nullable
-    @Override
-    public TileEntity createNewTileEntity(IBlockReader worldIn) {
-        return null;
     }
 
     @Override

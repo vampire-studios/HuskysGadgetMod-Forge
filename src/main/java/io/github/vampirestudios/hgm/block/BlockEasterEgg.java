@@ -1,13 +1,11 @@
 package io.github.vampirestudios.hgm.block;
 
-import io.github.vampirestudios.gadget.init.GadgetItems;
 import io.github.vampirestudios.hgm.HuskysGadgetMod;
 import io.github.vampirestudios.hgm.block.entity.TileEntityEasterEgg;
+import io.github.vampirestudios.hgm.init.GadgetItems;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
@@ -21,28 +19,28 @@ import net.minecraft.world.World;
 
 import javax.annotation.Nullable;
 
-public class BlockEasterEgg extends Block implements ITileEntityProvider {
+public class BlockEasterEgg extends Block {
 
     public BlockEasterEgg() {
-        super(Properties.create(Material.CARPET).hardnessAndResistance(-1.0F));
-        this.setHardness(-1.0f);
+        super(Properties.create(Material.CARPET).hardnessAndResistance(1.0F, 1.0F));
         this.setRegistryName(new ResourceLocation(HuskysGadgetMod.MOD_ID, "easter_egg"));
     }
 
     @Override
-    public void onBlockClicked(BlockState state, World worldIn, BlockPos pos, PlayerEntity playerIn) {
-        super.onBlockClicked(state, worldIn, pos, playerIn);
+    public void onBlockHarvested(World worldIn, BlockPos pos, BlockState state, PlayerEntity player) {
         if (!worldIn.isRemote) {
             TileEntity te = worldIn.getTileEntity(pos);
             if (te instanceof TileEntityEasterEgg) {
                 TileEntityEasterEgg eggte = (TileEntityEasterEgg) te;
-                ItemStack egg = new ItemStack(GadgetItems.easter_egg);
+                ItemStack egg = new ItemStack(GadgetItems.EASTER_EGG_ITEM);
                 CompoundNBT nbt = eggte.writeColorsToNBT(new CompoundNBT());
                 egg.setTag(nbt);
                 worldIn.addEntity(new ItemEntity(worldIn, pos.getX(), pos.getY(), pos.getZ(), egg));
+                System.out.println("Breaking block");
             }
             worldIn.destroyBlock(pos, false);
         }
+
     }
 
     @Override
@@ -58,7 +56,12 @@ public class BlockEasterEgg extends Block implements ITileEntityProvider {
     @Nullable
     @Override
     public TileEntity createTileEntity(BlockState state, IBlockReader world) {
-        World world1 = Minecraft.getInstance().world;
-        return new TileEntityEasterEgg(world1.isRemote ? null : world1.rand);
+        return new TileEntityEasterEgg();
     }
+
+    @Override
+    public boolean hasTileEntity(BlockState state) {
+        return true;
+    }
+
 }

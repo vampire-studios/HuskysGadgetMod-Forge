@@ -10,18 +10,13 @@ import java.util.Random;
 
 public class TileEntityEasterEgg extends TileEntity {
 
+    static Random rng = new Random();
     private int color0, color1;
 
-    public TileEntityEasterEgg(Random r) {
-        super(GadgetTileEntities.EASTER_EGG);
-        if (r != null) {
-            this.color0 = r.nextInt(0xFFFFFF);
-            this.color1 = r.nextInt(0xFFFFFF);
-        }
-    }
-
     public TileEntityEasterEgg() {
-        this(null);
+        super(GadgetTileEntities.EASTER_EGG);
+        this.color0 = rng.nextInt(0xFFFFFF);
+        this.color1 = rng.nextInt(0xFFFFFF);
     }
 
     @Override
@@ -44,7 +39,7 @@ public class TileEntityEasterEgg extends TileEntity {
         this.readColorsFromNBT(compound);
     }
 
-    public void readColorsFromNBT(CompoundNBT compound) {
+    private void readColorsFromNBT(CompoundNBT compound) {
         for (int i = 0; i < 2; i++) {
             if (compound.contains("color" + i)) {
                 this.setColor(i, compound.getInt("color" + i));
@@ -71,7 +66,7 @@ public class TileEntityEasterEgg extends TileEntity {
         return index == 0 ? color0 : (index == 1 ? color1 : 0xFFFFFF);
     }
 
-    public void setColor(int index, int color) {
+    private void setColor(int index, int color) {
         if (index == 0) {
             this.color0 = color;
         } else if (index == 1) {
