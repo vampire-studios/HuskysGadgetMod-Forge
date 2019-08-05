@@ -1,7 +1,9 @@
 package io.github.vampirestudios.hgm.block;
 
 import io.github.vampirestudios.hgm.HuskysGadgetMod;
-import net.minecraft.block.*;
+import net.minecraft.block.BlockState;
+import net.minecraft.block.DoorBlock;
+import net.minecraft.block.FenceGateBlock;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.effect.LightningBoltEntity;
@@ -9,17 +11,17 @@ import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.monster.CreeperEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.particles.ParticleTypes;
-import net.minecraft.util.*;
+import net.minecraft.util.Direction;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class BlockElectricSecurityFence extends FenceBlock {
-
-    protected static DamageSource electric = new DamageSource("electricity");
-
-    public BlockElectricSecurityFence() {
-        super(Properties.create(Material.IRON).lightValue(2).sound(SoundType.ANVIL).hardnessAndResistance(1.0F));
-        this.setRegistryName(HuskysGadgetMod.MOD_ID, "electric_fence");
+public class BlockElectricSecurityGate extends DoorBlock {
+    public BlockElectricSecurityGate() {
+        super(Properties.create(Material.IRON).hardnessAndResistance(1.0F).lightValue(2));
+        this.setRegistryName(new ResourceLocation(HuskysGadgetMod.MOD_ID, "laser_gate"));
     }
 
     @Override
@@ -40,7 +42,7 @@ public class BlockElectricSecurityFence extends FenceBlock {
             {
                 if (!((PlayerEntity) entity).isCreative())
                 {
-                    entity.attackEntityFrom(this.electric, (int) 2.0F);
+                    entity.attackEntityFrom(BlockElectricSecurityFence.electric, (int) 2.0F);
                     world.playSound(null, pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D, SoundEvents.BLOCK_ANVIL_HIT, SoundCategory.BLOCKS, 0.2F, 1.0F);
 
                     this.sparkle(world, pos);
@@ -48,7 +50,7 @@ public class BlockElectricSecurityFence extends FenceBlock {
             }
             else
             {
-                entity.attackEntityFrom(this.electric, (int) 2.0F);
+                entity.attackEntityFrom(BlockElectricSecurityFence.electric, (int) 2.0F);
                 world.playSound(null, pos.getX() + 0.5D, pos.getY() + 0.5D, pos.getZ() + 0.5D, SoundEvents.BLOCK_ANVIL_HIT, SoundCategory.BLOCKS, 0.2F, 1.0F);
                 this.sparkle(world, pos);
             }
@@ -101,13 +103,5 @@ public class BlockElectricSecurityFence extends FenceBlock {
                 worldIn.addParticle(ParticleTypes.CAMPFIRE_COSY_SMOKE, d1, d2, d3, 0.0D, 0.0D, 0.0D);
             }
         }
-    }
-
-    @Override
-    public boolean func_220111_a(BlockState p_220111_1_, boolean p_220111_2_, Direction p_220111_3_) {
-        Block lvt_4_1_ = p_220111_1_.getBlock();
-        boolean lvt_5_1_ = p_220111_1_.getMaterial() == this.material && lvt_4_1_ instanceof BlockElectricSecurityFence;
-//        boolean lvt_6_1_ = lvt_4_1_ instanceof BlockElectricSecurityGate && BlockElectricSecurityGate.isParallel(p_220111_1_, p_220111_3_);
-        return !cannotAttach(lvt_4_1_) && p_220111_2_ || lvt_5_1_;
     }
 }
