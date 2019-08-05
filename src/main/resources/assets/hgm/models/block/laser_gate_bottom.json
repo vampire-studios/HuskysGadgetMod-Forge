@@ -1,0 +1,7 @@
+{
+    "parent": "block/door_bottom",
+    "textures": {
+        "bottom": "hgm:block/electric_gate",
+        "top": "hgm:block/electric_gate"
+    }
+}

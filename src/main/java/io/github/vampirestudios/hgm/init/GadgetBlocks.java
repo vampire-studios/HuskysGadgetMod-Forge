@@ -1,10 +1,7 @@
 package io.github.vampirestudios.hgm.init;
 
 import io.github.vampirestudios.hgm.HuskysGadgetMod;
-import io.github.vampirestudios.hgm.block.BlockEasterEgg;
-import io.github.vampirestudios.hgm.block.BlockElectricSecurityFence;
-import io.github.vampirestudios.hgm.block.BlockRoofLights;
-import io.github.vampirestudios.hgm.block.BlockServerTerminal;
+import io.github.vampirestudios.hgm.block.*;
 import io.github.vampirestudios.hgm.item.CustomBlockItem;
 import net.minecraft.block.Block;
 import net.minecraft.item.DyeColor;
@@ -18,6 +15,7 @@ public class GadgetBlocks {
 
     public static final Block SERVER_TERMINAL = new BlockServerTerminal();
     public static final Block ELECTRIC_SECURITY_FENCE = new BlockElectricSecurityFence();
+    public static final Block LASER_GATE = new BlockElectricSecurityGate();
     public static final Block EASTER_EGG = new BlockEasterEgg();
     public static final Block WHITE_ROOF_LIGHT = new BlockRoofLights(DyeColor.WHITE);
     public static final Block ORANGE_ROOF_LIGHT = new BlockRoofLights(DyeColor.ORANGE);
@@ -42,6 +40,7 @@ public class GadgetBlocks {
                 SERVER_TERMINAL,
                 EASTER_EGG,
                 ELECTRIC_SECURITY_FENCE,
+                LASER_GATE
                 WHITE_ROOF_LIGHT,
                 ORANGE_ROOF_LIGHT,
                 MAGENTA_ROOF_LIGHT,
@@ -66,6 +65,7 @@ public class GadgetBlocks {
         event.getRegistry().registerAll(
                 new CustomBlockItem(SERVER_TERMINAL, HuskysGadgetMod.deviceDecoration),
                 new CustomBlockItem(ELECTRIC_SECURITY_FENCE, HuskysGadgetMod.deviceDecoration),
+                new CustomBlockItem(LASER_GATE, HuskysGadgetMod.deviceDecoration),
                 new CustomBlockItem(WHITE_ROOF_LIGHT, HuskysGadgetMod.deviceDecoration),
                 new CustomBlockItem(ORANGE_ROOF_LIGHT, HuskysGadgetMod.deviceDecoration),
                 new CustomBlockItem(MAGENTA_ROOF_LIGHT, HuskysGadgetMod.deviceDecoration),
