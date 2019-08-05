@@ -20,14 +20,17 @@ public class GadgetBlocks {
 
     @SubscribeEvent
     public static void onBlocksRegistry(final RegistryEvent.Register<Block> event) {
-        event.getRegistry().registerAll(SERVER_TERMINAL, EASTER_EGG);
-        event.getRegistry().registerAll(ELECTRIC_SECURITY_FENCE);
+        event.getRegistry().registerAll(
+                SERVER_TERMINAL, EASTER_EGG, ELECTRIC_SECURITY_FENCE
+        );
     }
 
     @SubscribeEvent
     public static void onItemsRegistry(final RegistryEvent.Register<Item> event) {
-        event.getRegistry().registerAll(new CustomBlockItem(SERVER_TERMINAL, ItemGroup.BUILDING_BLOCKS));
-        event.getRegistry().registerAll(new CustomBlockItem(ELECTRIC_SECURITY_FENCE, ItemGroup.BUILDING_BLOCKS));
+        event.getRegistry().registerAll(
+                new CustomBlockItem(SERVER_TERMINAL, ItemGroup.BUILDING_BLOCKS),
+                new CustomBlockItem(ELECTRIC_SECURITY_FENCE, ItemGroup.BUILDING_BLOCKS)
+        );
     }
 
 }
