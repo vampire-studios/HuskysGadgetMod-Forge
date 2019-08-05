@@ -1,0 +1,7 @@
+{
+  "parent": "hgm:block/roof_light",
+  "textures": {
+    "0": "hgm:block/light_2",
+    "particle": "hgm:block/light_2"
+  }
+}

@@ -1,7 +1,6 @@
 package io.github.vampirestudios.hgm.block;
 
 import io.github.vampirestudios.hgm.block.entity.TileEntityRoofLights;
-import io.github.vampirestudios.hgm.utils.IColored;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.material.Material;
@@ -12,11 +11,10 @@ import net.minecraft.item.DyeColor;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.state.EnumProperty;
 import net.minecraft.state.StateContainer;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 
@@ -24,11 +22,9 @@ import javax.annotation.Nullable;
 
 public class BlockRoofLights extends BlockDecoration {
 
-    public static final EnumProperty<DyeColor> COLOR = EnumProperty.create("color", DyeColor.class);
-
-    public BlockRoofLights() {
-        super(Material.ANVIL, "roof_lights");
-        this.setDefaultState(getDefaultState().with(COLOR, DyeColor.WHITE));
+    public BlockRoofLights(DyeColor color) {
+        super(Material.ANVIL, String.format("%s_roof_light", color.getName()));
+        this.setDefaultState(getDefaultState().with(FACING, Direction.NORTH));
     }
 
     @Nullable
@@ -69,18 +65,8 @@ public class BlockRoofLights extends BlockDecoration {
     }
 
     @Override
-    public BlockState getStateAtViewpoint(BlockState state, IBlockReader world, BlockPos pos, Vec3d viewpoint) {
-        TileEntity tileEntity = world.getTileEntity(pos);
-        if (tileEntity instanceof IColored) {
-            IColored colorable = (IColored) tileEntity;
-            state = state.with(COLOR, colorable.getColor());
-        }
-        return state;
-    }
-
-    @Override
     protected void fillStateContainer(StateContainer.Builder<Block, BlockState> p_206840_1_) {
-        p_206840_1_.add(FACING, COLOR);
+        p_206840_1_.add(FACING);
     }
 
 }
