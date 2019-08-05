@@ -1,6 +1,8 @@
 package io.github.vampirestudios.hgm.init;
 
 import io.github.vampirestudios.hgm.HuskysGadgetMod;
+import io.github.vampirestudios.hgm.block.ColoredBlock;
+import io.github.vampirestudios.hgm.item.BaseItem;
 import io.github.vampirestudios.hgm.item.ItemMotherBoard;
 import net.minecraft.item.*;
 import net.minecraft.potion.EffectInstance;
@@ -27,16 +29,35 @@ public class GadgetItems {
     public static final ItemMotherBoard.Component WIFI_CARD = new ItemMotherBoard.Component("wifi_card");
     public static final ItemMotherBoard.Component GPU = new ItemMotherBoard.Component("gpu");
 
+    public static final Item CAMERA = new BaseItem("camera");
+    public static final Item CD = new BaseItem("cd");
+    public static final Item DVD = new BaseItem("dvd");
+    public static final Item[] FLASH_DRIVES = new Item[16];
+
+    public static final Item ID_CARD = new BaseItem("id_card");
+    public static final Item WHITE_WIIU_GAMEPAD = new BaseItem("white_wiiu_gamepad");
+    public static final Item BLACK_WIIU_GAMEPAD = new BaseItem("black_wiiu_gamepad");
+
     @SubscribeEvent
     public static void onItemsRegistry(final RegistryEvent.Register<Item> event) {
+        for (DyeColor color : DyeColor.values()) {
+            FLASH_DRIVES[color.getId()] = new BaseItem("flash_drive_" + color.getName().toLowerCase());
+        }
         event.getRegistry().registerAll(
                 EASTER_EGG_ITEM,
                 MOTHERBOARD,
                 CPU,
                 RAM_STICKS,
                 WIFI_CARD,
-                GPU
+                GPU,
+                CAMERA,
+                CD,
+                DVD,
+                ID_CARD,
+                WHITE_WIIU_GAMEPAD,
+                BLACK_WIIU_GAMEPAD
         );
+        event.getRegistry().registerAll(FLASH_DRIVES);
     }
 
 }
