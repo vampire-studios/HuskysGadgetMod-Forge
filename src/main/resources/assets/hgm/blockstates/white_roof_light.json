@@ -1,0 +1,19 @@
+{
+	"forge_marker": 1,
+	"defaults": {
+		"model": "hgm:block/roof_light",
+      	"transform": "forge:default-block",
+		"textures": {
+			"0": "hgm:block/light_2"
+		}
+	},
+	"variants": {
+		"facing": {
+			"north": { "y": 90   },
+			"east":  { "y": 180  },
+			"south": { "y": 270 },
+			"west":  { "y": 360 }
+		}
+	}
+}
+
