@@ -1,23 +1,33 @@
-package io.github.vampirestudios.hgm.block;
+package io.github.vampirestudios.hgm.item;
 
-import io.github.vampirestudios.hgm.utils.IBlockColorProvider;
+import io.github.vampirestudios.hgm.HuskysGadgetMod;
 import io.github.vampirestudios.hgm.utils.IItemColorProvider;
 import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.client.renderer.color.IBlockColor;
 import net.minecraft.client.renderer.color.IItemColor;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.DyeColor;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TextFormatting;
+import net.minecraft.world.World;
 import org.apache.commons.lang3.text.WordUtils;
 
 import java.util.List;
 
-public interface ColoredBlock extends IBlockColorProvider, IItemColorProvider {
+public class ItemColored extends Item implements IItemColorProvider {
 
-    DyeColor getDyeColor();
+    public DyeColor color;
 
-    static TextFormatting getFromColor(DyeColor color) {
+    public ItemColored(String name, DyeColor color) {
+        super(new Properties().group(HuskysGadgetMod.deviceItems));
+        setRegistryName(new ResourceLocation(HuskysGadgetMod.MOD_ID, String.format("%s_%s", color.getName(), name)));
+        this.color = color;
+    }
+
+    private static TextFormatting getFromColor(DyeColor color) {
         switch (color) {
             case ORANGE:
             case BROWN:
@@ -52,23 +62,19 @@ public interface ColoredBlock extends IBlockColorProvider, IItemColorProvider {
         }
     }
 
-    default void addInformation(List<ITextComponent> tooltip) {
+    @Override
+    public void addInformation(ItemStack stack, World player, List<ITextComponent> tooltip, ITooltipFlag advanced) {
         if (!Screen.hasShiftDown()) {
-            tooltip.add(new StringTextComponent("Hold " + TextFormatting.BOLD + getFromColor(getDyeColor()) + "SHIFT " + TextFormatting.GRAY + "for more information"));
+            tooltip.add(new StringTextComponent("Hold " + TextFormatting.BOLD + getFromColor(color) + "SHIFT " + TextFormatting.GRAY + "for more information"));
         } else {
-            String colorName = getDyeColor().getName().replace("_", " ");
+            String colorName = color.getName().replace("_", " ");
             colorName = WordUtils.capitalize(colorName);
-            tooltip.add(new StringTextComponent("Color: " + TextFormatting.BOLD.toString() + getFromColor(getDyeColor()).toString() + colorName));
+            tooltip.add(new StringTextComponent("Color: " + TextFormatting.BOLD.toString() + getFromColor(color).toString() + colorName));
         }
     }
 
     @Override
-    default IBlockColor getBlockColor() {
-        return (state, worldIn, pos, tintIndex) -> DyeColor.values()[tintIndex].getId();
-    }
-
-    @Override
-    default IItemColor getItemColor() {
+    public IItemColor getItemColor() {
         return (stack, tintIndex) -> DyeColor.values()[tintIndex].getId();
     }
 
