@@ -10,6 +10,7 @@ import net.minecraft.entity.effect.LightningBoltEntity;
 import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.monster.CreeperEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.item.BlockItemUseContext;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.state.BooleanProperty;
 import net.minecraft.state.StateContainer;
@@ -23,86 +24,15 @@ import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 
-public class BlockElectricSecurityFence extends Block {
+import javax.annotation.Nullable;
 
-    public static final BooleanProperty NORTH = BooleanProperty.create("north");
-    public static final BooleanProperty EAST = BooleanProperty.create("east");
-    public static final BooleanProperty SOUTH = BooleanProperty.create("south");
-    public static final BooleanProperty WEST = BooleanProperty.create("west");
-
-    private static final AxisAlignedBB[] BOUNDING_BOX = new AxisAlignedBB[] { new AxisAlignedBB(0.4375, 0.0, 0.4375, 0.5625, 1.0, 0.5625), new AxisAlignedBB(0.4375, 0.0, 0.4375, 0.5625, 1.0, 1.0), new AxisAlignedBB(0.0, 0.0, 0.4375, 0.5625, 1.0, 0.5625), new AxisAlignedBB(0.0, 0.0, 0.4375, 0.5625, 1.0, 1.0), new AxisAlignedBB(0.4375, 0.0, 0.0, 0.5625, 1.0, 0.5625), new AxisAlignedBB(0.4375, 0.0, 0.0, 0.5625, 1.0, 1.0), new AxisAlignedBB(0.0, 0.0, 0.0, 0.5625, 1.0, 0.5625), new AxisAlignedBB(0.0, 0.0, 0.0, 0.5625, 1.0, 1.0), new AxisAlignedBB(0.4375, 0.0, 0.4375, 1.0, 1.0, 0.5625), new AxisAlignedBB(0.4375, 0.0, 0.4375, 1.0, 1.0, 1.0), new AxisAlignedBB(0.0, 0.0, 0.4375, 1.0, 1.0, 0.5625), new AxisAlignedBB(0.0, 0.0, 0.4375, 1.0, 1.0, 1.0), new AxisAlignedBB(0.4375, 0.0, 0.0, 1.0, 1.0, 0.5625), new AxisAlignedBB(0.4375, 0.0, 0.0, 1.0, 1.0, 1.0), new AxisAlignedBB(0.0, 0.0, 0.0, 1.0, 1.0, 0.5625), new AxisAlignedBB(0.0, 0.0, 0.0, 1.0, 1.0, 1.0) };
-
-    private static final VoxelShape COLLISION_BOX_CENTER = VoxelShapes.create(new AxisAlignedBB(0.4375, 0.0, 0.4375, 0.5625, 1.0, 0.5625));
-    private static final VoxelShape COLLISION_BOX_NORTH = VoxelShapes.create(CollisionHelper.getBlockBounds(Direction.NORTH, new Bounds(0.5625, 0.0, 0.4375, 1.0, 1.0, 0.5625)));
-    private static final VoxelShape COLLISION_BOX_EAST = VoxelShapes.create(CollisionHelper.getBlockBounds(Direction.EAST, new Bounds(0.5625, 0.0, 0.4375, 1.0, 1.0, 0.5625)));
-    private static final VoxelShape COLLISION_BOX_SOUTH = VoxelShapes.create(CollisionHelper.getBlockBounds(Direction.SOUTH, new Bounds(0.5625, 0.0, 0.4375, 1.0, 1.0, 0.5625)));
-    private static final VoxelShape COLLISION_BOX_WEST = VoxelShapes.create(CollisionHelper.getBlockBounds(Direction.WEST, new Bounds(0.5625, 0.0, 0.4375, 1.0, 1.0, 0.5625)));
-
-    private static final VoxelShape[] COLLISION_BOXES = new VoxelShape[] {COLLISION_BOX_SOUTH,COLLISION_BOX_WEST,COLLISION_BOX_NORTH,COLLISION_BOX_EAST};
+public class BlockElectricSecurityFence extends FenceBlock {
 
     protected static DamageSource electricFence = new DamageSource("electricity");
 
     public BlockElectricSecurityFence() {
         super(Properties.create(Material.IRON).lightValue(2).sound(SoundType.ANVIL).hardnessAndResistance(1.0F));
         this.setRegistryName(HuskysGadgetMod.MOD_ID, "electric_fence");
-        this.setDefaultState(this.getDefaultState().with(NORTH, false).with(EAST, false).with(SOUTH, false).with(WEST, false));
-    }
-
-    @Override
-    public BlockRenderType getRenderType(BlockState p_149645_1_) {
-        return BlockRenderType.MODEL;
-    }
-
-    @Override
-    public boolean isVariableOpacity() {
-        return false;
-    }
-
-    @Override
-    public boolean isNormalCube(BlockState p_220081_1_, IBlockReader p_220081_2_, BlockPos p_220081_3_) {
-        return false;
-    }
-
-    @Override
-    public VoxelShape getCollisionShape(BlockState p_220071_1_, IBlockReader p_220071_2_, BlockPos p_220071_3_, ISelectionContext p_220071_4_) {
-        return COLLISION_BOXES[getBoundingBoxId(p_220071_1_)];
-    }
-
-    @Override
-    public VoxelShape getRenderShape(BlockState p_196247_1_, IBlockReader p_196247_2_, BlockPos p_196247_3_) {
-        return VoxelShapes.create(BOUNDING_BOX[getBoundingBoxId(p_196247_1_)]);
-    }
-
-    @Override
-    public VoxelShape getShape(BlockState p_220053_1_, IBlockReader p_220053_2_, BlockPos p_220053_3_, ISelectionContext p_220053_4_) {
-        return VoxelShapes.create(BOUNDING_BOX[getBoundingBoxId(p_220053_1_)]);
-    }
-
-    private static int getBoundingBoxId(BlockState state)
-    {
-        int i = 0;
-
-        if ((state.get(NORTH)))
-        {
-            i |= 1 << Direction.NORTH.getHorizontalIndex();
-        }
-
-        if ((state.get(EAST)))
-        {
-            i |= 1 << Direction.EAST.getHorizontalIndex();
-        }
-
-        if ((state.get(SOUTH)))
-        {
-            i |= 1 << Direction.SOUTH.getHorizontalIndex();
-        }
-
-        if ((state.get(WEST)))
-        {
-            i |= 1 << Direction.WEST.getHorizontalIndex();
-        }
-
-        return i;
     }
 
     @Override
@@ -186,9 +116,11 @@ public class BlockElectricSecurityFence extends Block {
         }
     }
 
-
     @Override
-    protected void fillStateContainer(StateContainer.Builder<Block, BlockState> p_206840_1_) {
-        p_206840_1_.add(NORTH,SOUTH,EAST,WEST);
+    public boolean func_220111_a(BlockState p_220111_1_, boolean p_220111_2_, Direction p_220111_3_) {
+        Block lvt_4_1_ = p_220111_1_.getBlock();
+        boolean lvt_5_1_ = p_220111_1_.getMaterial() == this.material;
+        boolean lvt_6_1_ = lvt_4_1_ instanceof BlockElectricSecurityFence;
+        return !cannotAttach(lvt_4_1_) && p_220111_2_ || lvt_5_1_ || lvt_6_1_;
     }
 }
