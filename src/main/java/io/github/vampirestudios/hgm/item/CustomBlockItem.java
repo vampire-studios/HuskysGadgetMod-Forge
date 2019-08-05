@@ -11,4 +11,9 @@ public class CustomBlockItem extends BlockItem {
         setRegistryName(blockIn.getRegistryName());
     }
 
+    public CustomBlockItem(Block blockIn, Properties properties, ItemGroup itemGroup) {
+        super(blockIn, properties.group(itemGroup));
+        setRegistryName(blockIn.getRegistryName());
+    }
+
 }
