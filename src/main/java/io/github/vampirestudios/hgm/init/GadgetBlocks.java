@@ -26,17 +26,13 @@ public class GadgetBlocks {
     public static final Block PAPER = new BlockPaper();
 
     @SubscribeEvent
-    public static void onBlocksRegistry(final RegistryEvent.Register<Block> event) {
+    public void onBlocksRegistry(final RegistryEvent.Register<Block> event) {
         for (DyeColor color : DyeColor.values()) {
-            ROOF_LIGHTS[color.getId()] = new BlockRoofLights(color);
-            ROUTERS[color.getId()] = new BlockRouter(color);
-            PRINTERS[color.getId()] = new BlockPrinter(color);
-            LAPTOPS[color.getId()] = new BlockLaptop(color);
+            event.getRegistry().register(ROOF_LIGHTS[color.getId()] = new BlockRoofLights(color));
+            event.getRegistry().register(ROUTERS[color.getId()] = new BlockRouter(color));
+            event.getRegistry().register(PRINTERS[color.getId()] = new BlockPrinter(color));
+            event.getRegistry().register(LAPTOPS[color.getId()] = new BlockLaptop(color));
         }
-        event.getRegistry().registerAll(ROOF_LIGHTS);
-        event.getRegistry().registerAll(ROUTERS);
-        event.getRegistry().registerAll(PRINTERS);
-        event.getRegistry().registerAll(LAPTOPS);
         event.getRegistry().registerAll(
                 SERVER_TERMINAL,
                 EASTER_EGG,
@@ -47,18 +43,18 @@ public class GadgetBlocks {
     }
 
     @SubscribeEvent
-    public static void onItemsRegistry(final RegistryEvent.Register<Item> event) {
+    public void onItemsRegistry(final RegistryEvent.Register<Item> event) {
         for (Block block : ROOF_LIGHTS) {
-            new CustomBlockItem(block, HuskysGadgetMod.deviceDecoration);
+            event.getRegistry().register(new CustomBlockItem(block, HuskysGadgetMod.deviceDecoration));
         }
         for (Block block : ROUTERS) {
-            new CustomBlockItem(block, HuskysGadgetMod.deviceDecoration);
+            event.getRegistry().register(new CustomBlockItem(block, HuskysGadgetMod.deviceDecoration));
         }
         for (Block block : PRINTERS) {
-            new CustomBlockItem(block, HuskysGadgetMod.deviceDecoration);
+            event.getRegistry().register(new CustomBlockItem(block, HuskysGadgetMod.deviceDecoration));
         }
         for (Block block : LAPTOPS) {
-            new CustomBlockItem(block, HuskysGadgetMod.deviceDecoration);
+            event.getRegistry().register(new CustomBlockItem(block, HuskysGadgetMod.deviceDecoration));
         }
         event.getRegistry().registerAll(
                 new CustomBlockItem(SERVER_TERMINAL, HuskysGadgetMod.deviceDecoration),

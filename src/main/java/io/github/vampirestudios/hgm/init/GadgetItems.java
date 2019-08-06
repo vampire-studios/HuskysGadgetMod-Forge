@@ -49,7 +49,7 @@ public class GadgetItems {
     public static final Item ETHERNET_CABLE = new ItemEthernetCable();
 
     @SubscribeEvent
-    public static void onItemsRegistry(final RegistryEvent.Register<Item> event) {
+    public void onItemsRegistry(final RegistryEvent.Register<Item> event) {
         for (DyeColor color : DyeColor.values()) {
             FLASH_DRIVES[color.getId()] = new BaseItem("flash_drive_" + color.getName().toLowerCase());
         }

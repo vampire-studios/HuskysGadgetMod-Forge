@@ -29,7 +29,7 @@ public class GadgetTileEntities {
     ).build(null).setRegistryName(new ResourceLocation(HuskysGadgetMod.MOD_ID, "laptop_be"));
 
     @SubscribeEvent
-    public static void onBlocksRegistry(final RegistryEvent.Register<TileEntityType<?>> event) {
+    public void onTileEntitiesRegistered(final RegistryEvent.Register<TileEntityType<?>> event) {
         event.getRegistry().registerAll(
                 EASTER_EGG,
                 ROOF_LIGHTS,
