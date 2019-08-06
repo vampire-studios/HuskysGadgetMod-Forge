@@ -5,7 +5,7 @@
   "textures": {
     "0": "#middle",
     "1": "#metal",
-    "2": "#middel_flipped"
+    "2": "#middle_flipped"
   },
   "elements": [
     {

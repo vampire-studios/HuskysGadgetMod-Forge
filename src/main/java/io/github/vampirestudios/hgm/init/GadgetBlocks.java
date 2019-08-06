@@ -76,7 +76,6 @@ public class GadgetBlocks {
                 EASTER_EGG,
                 ELECTRIC_SECURITY_FENCE,
                 LASER_GATE,
-
                 WHITE_ROOF_LIGHT,
                 ORANGE_ROOF_LIGHT,
                 MAGENTA_ROOF_LIGHT,
