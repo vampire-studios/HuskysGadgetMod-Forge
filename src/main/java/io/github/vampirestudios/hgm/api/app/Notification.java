@@ -5,6 +5,7 @@ import io.github.vampirestudios.hgm.network.PacketHandler;
 import io.github.vampirestudios.hgm.network.task.MessageNotification;
 import net.minecraft.entity.player.ServerPlayerEntity;
 import net.minecraft.nbt.CompoundNBT;
+import net.minecraftforge.fml.network.PacketDistributor;
 import org.apache.commons.lang3.StringUtils;
 
 /**
@@ -68,6 +69,6 @@ public class Notification {
      * @param player the target player
      */
     public void pushTo(ServerPlayerEntity player) {
-        PacketHandler.INSTANCE.sendTo(new MessageNotification(this), player);
+        PacketHandler.INSTANCE.send(PacketDistributor.PLAYER.with(() -> player), new MessageNotification(this));
     }
 }

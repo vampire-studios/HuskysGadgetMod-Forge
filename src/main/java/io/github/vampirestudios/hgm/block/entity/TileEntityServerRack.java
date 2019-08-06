@@ -1,19 +1,24 @@
 package io.github.vampirestudios.hgm.block.entity;
 
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.ITickable;
+import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.tileentity.ITickableTileEntity;
+import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.math.AxisAlignedBB;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
-public class TileEntityServerRack extends TileMod implements ITickable {
+public class TileEntityServerRack extends TileMod implements ITickableTileEntity {
 
-    @SideOnly(Side.CLIENT)
+    @OnlyIn(Dist.CLIENT)
     public float rotation;
     private boolean hasServers = false, hasConnectedPower = false;
 
+    public TileEntityServerRack(TileEntityType<?> tileEntityTypeIn) {
+        super(tileEntityTypeIn);
+    }
+
     @Override
-    public void update() {
+    public void tick() {
         if (world.isRemote) {
             if (rotation > 0) {
                 rotation -= 10F;
@@ -24,22 +29,22 @@ public class TileEntityServerRack extends TileMod implements ITickable {
     }
 
     @Override
-    public NBTTagCompound writeToNBT(NBTTagCompound compound) {
-        super.writeToNBT(compound);
-        if (compound.hasKey("hasServers")) {
+    public CompoundNBT write(CompoundNBT compound) {
+        super.write(compound);
+        if (compound.contains("hasServers")) {
             this.hasServers = compound.getBoolean("hasServers");
         }
-        if (compound.hasKey("hasConnectedPower")) {
+        if (compound.contains("hasConnectedPower")) {
             this.hasConnectedPower = compound.getBoolean("hasConnectedPower");
         }
         return compound;
     }
 
     @Override
-    public void readFromNBT(NBTTagCompound compound) {
-        super.readFromNBT(compound);
-        compound.setBoolean("hasServers", hasServers);
-        compound.setBoolean("hasConnectedPower", hasConnectedPower);
+    public void read(CompoundNBT compound) {
+        super.read(compound);
+        compound.putBoolean("hasServers", hasServers);
+        compound.putBoolean("hasConnectedPower", hasConnectedPower);
     }
 
     @Override
@@ -48,7 +53,7 @@ public class TileEntityServerRack extends TileMod implements ITickable {
     }
 
     @Override
-    @SideOnly(Side.CLIENT)
+    @OnlyIn(Dist.CLIENT)
     public AxisAlignedBB getRenderBoundingBox() {
         return INFINITE_EXTENT_AABB;
     }

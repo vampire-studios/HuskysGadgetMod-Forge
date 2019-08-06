@@ -1,11 +1,9 @@
 package io.github.vampirestudios.hgm.block.entity;
 
-import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class TileEntityServer extends TileEntityBaseDevice {
 
@@ -16,11 +14,11 @@ public class TileEntityServer extends TileEntityBaseDevice {
             connected = false;
 
     public TileEntityServer() {
-        super("Server", false);
+        super("Server", false, null);
     }
 
     @Override
-    public void update() {
+    public void tick() {
         if (world.isRemote) {
             if (rotation > 0) {
                 rotation -= 10F;
@@ -31,29 +29,29 @@ public class TileEntityServer extends TileEntityBaseDevice {
     }
 
     @Override
-    public NBTTagCompound writeToNBT(NBTTagCompound compound) {
-        super.writeToNBT(compound);
-        if (compound.hasKey("connected")) {
+    public CompoundNBT write(CompoundNBT compound) {
+        super.write(compound);
+        if (compound.contains("connected")) {
             this.connected = compound.getBoolean("connected");
         }
-        if (compound.hasKey("inServerRack")) {
+        if (compound.contains("inServerRack")) {
             this.inServerRack = compound.getBoolean("inServerRack");
         }
         return compound;
     }
 
     @Override
-    public void readFromNBT(NBTTagCompound compound) {
-        super.readFromNBT(compound);
-        compound.setBoolean("connected", connected);
-        compound.setBoolean("inServerRack", inServerRack);
+    public void read(CompoundNBT compound) {
+        super.read(compound);
+        compound.putBoolean("connected", connected);
+        compound.putBoolean("inServerRack", inServerRack);
     }
 
     @Override
-    public NBTTagCompound writeSyncTag() {
-        NBTTagCompound tag = new NBTTagCompound();
-        tag.setBoolean("connected", connected);
-        tag.setBoolean("inServerRack", inServerRack);
+    public CompoundNBT writeSyncTag() {
+        CompoundNBT tag = new CompoundNBT();
+        tag.putBoolean("connected", connected);
+        tag.putBoolean("inServerRack", inServerRack);
         return tag;
     }
 
@@ -63,7 +61,7 @@ public class TileEntityServer extends TileEntityBaseDevice {
     }
 
     @Override
-    @SideOnly(Side.CLIENT)
+    @OnlyIn(Dist.CLIENT)
     public AxisAlignedBB getRenderBoundingBox() {
         return INFINITE_EXTENT_AABB;
     }
@@ -74,7 +72,7 @@ public class TileEntityServer extends TileEntityBaseDevice {
 
     public void connectedNotConnected() {
         connected = !connected;
-        pipeline.setBoolean("connected", connected);
+        pipeline.putBoolean("connected", connected);
         sync();
     }
 

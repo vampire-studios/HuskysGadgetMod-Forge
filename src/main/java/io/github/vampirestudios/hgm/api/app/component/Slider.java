@@ -1,10 +1,10 @@
 package io.github.vampirestudios.hgm.api.app.component;
 
-import io.github.vampirestudios.gadget.util.GuiHelper;
 import io.github.vampirestudios.hgm.api.app.Component;
 import io.github.vampirestudios.hgm.api.app.listener.ClickListener;
 import io.github.vampirestudios.hgm.api.app.listener.ReleaseListener;
 import io.github.vampirestudios.hgm.api.app.listener.SlideListener;
+import io.github.vampirestudios.hgm.api.utils.RenderUtil;
 import io.github.vampirestudios.hgm.core.BaseDevice;
 import net.minecraft.client.Minecraft;
 
@@ -41,10 +41,10 @@ public class Slider extends Component {
     @Override
     public void render(BaseDevice laptop, Minecraft mc, int x, int y, int mouseX, int mouseY, boolean windowActive, float partialTicks) {
         if (this.visible) {
-            drawRect(xPosition, yPosition + 4, xPosition + width, yPosition + 8, borderColour);
-            drawRect(xPosition + 1, yPosition + 5, xPosition + width - 1, yPosition + 7, backgroundColour);
-            drawRect(xPosition + newSliderX, yPosition, xPosition + newSliderX + 8, yPosition + 12, borderColour);
-            drawRect(xPosition + newSliderX + 1, yPosition + 1, xPosition + newSliderX + 7, yPosition + 11, sliderColour);
+            fill(xPosition, yPosition + 4, xPosition + width, yPosition + 8, borderColour);
+            fill(xPosition + 1, yPosition + 5, xPosition + width - 1, yPosition + 7, backgroundColour);
+            fill(xPosition + newSliderX, yPosition, xPosition + newSliderX + 8, yPosition + 12, borderColour);
+            fill(xPosition + newSliderX + 1, yPosition + 1, xPosition + newSliderX + 7, yPosition + 11, sliderColour);
         }
     }
 
@@ -53,7 +53,7 @@ public class Slider extends Component {
         if (!this.visible || !this.enabled)
             return;
 
-        if (GuiHelper.isMouseInside(mouseX, mouseY, xPosition + newSliderX, yPosition, xPosition + newSliderX + 8, yPosition + 12)) {
+        if (RenderUtil.isMouseInside(mouseX, mouseY, xPosition + newSliderX, yPosition, xPosition + newSliderX + 8, yPosition + 12)) {
             this.dragging = true;
             this.clickX = mouseX;
             if (clickListener != null) {
@@ -98,7 +98,7 @@ public class Slider extends Component {
         if (!this.visible || !this.enabled)
             return;
 
-        if (GuiHelper.isMouseInside(mouseX, mouseY, xPosition, yPosition, xPosition + width, yPosition + 12)) {
+        if (RenderUtil.isMouseInside(mouseX, mouseY, xPosition, yPosition, xPosition + width, yPosition + 12)) {
             prevSliderX = newSliderX;
             if (direction) {
                 newSliderX++;

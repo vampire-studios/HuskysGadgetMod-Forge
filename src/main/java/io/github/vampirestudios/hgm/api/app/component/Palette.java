@@ -1,9 +1,9 @@
 package io.github.vampirestudios.hgm.api.app.component;
 
 import com.mojang.blaze3d.platform.GlStateManager;
-import io.github.vampirestudios.gadget.util.GuiHelper;
 import io.github.vampirestudios.hgm.api.app.Component;
 import io.github.vampirestudios.hgm.api.app.Layout;
+import io.github.vampirestudios.hgm.api.utils.RenderUtil;
 import io.github.vampirestudios.hgm.core.BaseDevice;
 import io.github.vampirestudios.hgm.utils.GLHelper;
 import net.minecraft.client.Minecraft;
@@ -61,7 +61,7 @@ public class Palette extends Component {
 
     @Override
     public void render(BaseDevice laptop, Minecraft mc, int x, int y, int mouseX, int mouseY, boolean windowActive, float partialTicks) {
-        Screen.drawRect(x, y, x + 52, y + 52, Color.DARK_GRAY.getRGB());
+        Screen.fill(x, y, x + 52, y + 52, Color.DARK_GRAY.getRGB());
 
         GlStateManager.disableLighting();
         GlStateManager.disableTexture();
@@ -90,7 +90,7 @@ public class Palette extends Component {
         if (mouseButton != 0)
             return;
 
-        if (GuiHelper.isMouseInside(mouseX, mouseY, xPosition + 1, yPosition + 1, xPosition + 51, yPosition + 51)) {
+        if (RenderUtil.isMouseInside(mouseX, mouseY, xPosition + 1, yPosition + 1, xPosition + 51, yPosition + 51)) {
             colourPicker.setValue(GLHelper.getPixel(mouseX, mouseY).getRGB());
         }
     }

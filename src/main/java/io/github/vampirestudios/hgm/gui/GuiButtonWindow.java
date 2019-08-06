@@ -19,7 +19,7 @@ public class GuiButtonWindow extends Button {
     public void renderButton(int mouseX, int mouseY, float partialTicks) {
         if (this.visible) {
             this.minecraft.getTextureManager().bindTexture(Window.WINDOW_GUI);
-            GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+            GlStateManager.color4f(1.0F, 1.0F, 1.0F, 1.0F);
             this.isHovered = mouseX >= this.x && mouseY >= this.y && mouseX < this.x + this.width && mouseY < this.y + this.height;
 
             GlStateManager.enableBlend();
@@ -27,7 +27,7 @@ public class GuiButtonWindow extends Button {
             GlStateManager.blendFunc(770, 771);
 
             int state = this.getHoverState(this.isHovered);
-            this.blit(this.x, this.y, state * this.width + 26, (2 - this.id) * this.height, this.width, this.height);
+            this.blit(this.x, this.y, state * this.width + 26, 2 * this.height, this.width, this.height);
         }
     }
 

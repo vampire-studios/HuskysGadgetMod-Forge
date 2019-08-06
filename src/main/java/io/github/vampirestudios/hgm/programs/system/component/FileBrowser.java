@@ -1,8 +1,6 @@
 package io.github.vampirestudios.hgm.programs.system.component;
 
 import com.mojang.blaze3d.platform.GlStateManager;
-import io.github.vampirestudios.gadget.api.app.component.*;
-import io.github.vampirestudios.gadget.core.io.task.TaskSetupFileBrowser;
 import io.github.vampirestudios.hgm.api.AppInfo;
 import io.github.vampirestudios.hgm.api.ApplicationManager;
 import io.github.vampirestudios.hgm.api.app.Application;
@@ -28,6 +26,7 @@ import io.github.vampirestudios.hgm.core.Wrappable;
 import io.github.vampirestudios.hgm.core.io.FileSystem;
 import io.github.vampirestudios.hgm.core.io.task.TaskGetFiles;
 import io.github.vampirestudios.hgm.core.io.task.TaskGetStructure;
+import io.github.vampirestudios.hgm.core.io.task.TaskSetupFileBrowser;
 import io.github.vampirestudios.hgm.programs.system.SystemApplication;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screen.Screen;

@@ -1,7 +1,6 @@
 package io.github.vampirestudios.hgm.api.app.component;
 
 import com.mojang.blaze3d.platform.GlStateManager;
-import io.github.vampirestudios.gadget.util.GuiHelper;
 import io.github.vampirestudios.hgm.api.app.Component;
 import io.github.vampirestudios.hgm.api.app.interfaces.IHighlight;
 import io.github.vampirestudios.hgm.api.app.listener.KeyListener;
@@ -11,11 +10,10 @@ import io.github.vampirestudios.hgm.utils.GLHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.util.ChatAllowedCharacters;
+import net.minecraft.util.SharedConstants;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.text.TextFormatting;
 import org.lwjgl.glfw.GLFW;
-import org.lwjgl.input.Keyboard;
 
 import javax.annotation.Nullable;
 import java.awt.*;
@@ -195,9 +193,9 @@ public class TextArea extends Component {
         if (!this.editable)
             return;
 
-        this.isFocused = GuiHelper.isMouseInside(mouseX, mouseY, xPosition, yPosition, xPosition + width, yPosition + height);
+        this.isFocused = RenderUtil.isMouseInside(mouseX, mouseY, xPosition, yPosition, xPosition + width, yPosition + height);
 
-        if (GuiHelper.isMouseWithin(mouseX, mouseY, xPosition + padding, yPosition + padding, width - padding * 2, height - padding * 2)) {
+        if (RenderUtil.isMouseInside(mouseX, mouseY, xPosition + padding, yPosition + padding, width - padding * 2, height - padding * 2)) {
             int lineX = mouseX - xPosition - padding + horizontalScroll;
             int lineY = (mouseY - yPosition - padding) / fontRenderer.FONT_HEIGHT + verticalScroll;
             if (lineY >= lines.size()) {
@@ -277,26 +275,26 @@ public class TextArea extends Component {
                 case GLFW.GLFW_KEY_BACKSPACE:
                     performBackspace();
                     break;
-                case Keyboard.KEY_RETURN:
+                case GLFW.GLFW_KEY_ENTER:
                     performReturn();
                     break;
-                case Keyboard.KEY_TAB:
+                case GLFW.GLFW_KEY_TAB:
                     writeText('\t');
                     break;
-                case Keyboard.KEY_LEFT:
+                case GLFW.GLFW_KEY_LEFT:
                     moveCursorLeft(1);
                     break;
-                case Keyboard.KEY_RIGHT:
+                case GLFW.GLFW_KEY_RIGHT:
                     moveCursorRight(1);
                     break;
-                case Keyboard.KEY_UP:
+                case GLFW.GLFW_KEY_UP:
                     moveCursorUp();
                     break;
-                case Keyboard.KEY_DOWN:
+                case GLFW.GLFW_KEY_DOWN:
                     moveCursorDown();
                     break;
                 default:
-                    if (ChatAllowedCharacters.isAllowedCharacter(character)) {
+                    if (SharedConstants.isAllowedCharacter(character)) {
                         writeText(character);
                     }
             }
@@ -310,7 +308,7 @@ public class TextArea extends Component {
 
     @Override
     protected void handleMouseScroll(int mouseX, int mouseY, boolean direction) {
-        if (GuiHelper.isMouseInside(mouseX, mouseY, xPosition, yPosition, xPosition + width, yPosition + height)) {
+        if (RenderUtil.isMouseInside(mouseX, mouseY, xPosition, yPosition, xPosition + width, yPosition + height)) {
             scroll(direction ? -1 : 1);
         }
     }
@@ -327,7 +325,7 @@ public class TextArea extends Component {
             int relativeScrollY = (int) (scrollPercentage * (visibleScrollBarHeight - scrollBarHeight));
             int posX = xPosition + width - 2 - scrollBarSize;
             int posY = yPosition + 2 + MathHelper.clamp(relativeScrollY + verticalOffset, 0, visibleScrollBarHeight - scrollBarHeight);
-            if (GuiHelper.isMouseInside(mouseX, mouseY, posX, posY, posX + scrollBarSize, posY + scrollBarHeight)) {
+            if (RenderUtil.isMouseInside(mouseX, mouseY, posX, posY, posX + scrollBarSize, posY + scrollBarHeight)) {
                 return ScrollBar.VERTICAL;
             }
         }
@@ -340,7 +338,7 @@ public class TextArea extends Component {
             int relativeScrollX = (int) (scrollPercentage * (visibleScrollBarWidth - scrollBarWidth));
             int posX = xPosition + 2 + MathHelper.clamp(relativeScrollX, 0, visibleScrollBarWidth - scrollBarWidth);
             int posY = yPosition + height - 2 - scrollBarSize;
-            if (GuiHelper.isMouseInside(mouseX, mouseY, posX, posY, posX + scrollBarWidth, posY + scrollBarSize)) {
+            if (RenderUtil.isMouseInside(mouseX, mouseY, posX, posY, posX + scrollBarWidth, posY + scrollBarSize)) {
                 return ScrollBar.HORIZONTAL;
             }
         }

@@ -410,7 +410,7 @@ public abstract class Application extends Wrappable {
     @Override
     public String getWindowTitle() {
         if (currentLayout.hasTitle()) {
-            return currentLayout.getTitle();
+            return currentLayout.getTitle().getFormattedText();
         }
         return info.getName();
     }

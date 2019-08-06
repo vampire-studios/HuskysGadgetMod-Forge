@@ -1,13 +1,10 @@
 package io.github.vampirestudios.hgm.api.print;
 
 import com.google.common.collect.HashBiMap;
-import io.github.vampirestudios.gadget.HuskyGadgetMod;
 import io.github.vampirestudios.hgm.HuskysGadgetMod;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
 
 import javax.annotation.Nullable;
 import java.lang.reflect.InvocationTargetException;
@@ -23,15 +20,15 @@ public class PrintingManager {
         try {
             classPrint.getConstructor().newInstance();
             if (HuskysGadgetMod.setup.registerPrint(identifier, classPrint)) {
-                HuskysGadgetMod.logger().info("Registering print '" + classPrint.getName() + "'");
+                HuskysGadgetMod.LOGGER.info("Registering print '" + classPrint.getName() + "'");
                 registeredPrints.put(identifier.toString(), classPrint);
             } else {
-                HuskyGadgetMod.logger().error("The print '" + classPrint.getName() + "' could not be registered due to a critical error!");
+                HuskysGadgetMod.LOGGER.error("The print '" + classPrint.getName() + "' could not be registered due to a critical error!");
             }
         } catch (NoSuchMethodException e) {
-            HuskyGadgetMod.logger().error("The print '" + classPrint.getName() + "' is missing an empty constructor and could not be registered!");
+            HuskysGadgetMod.LOGGER.error("The print '" + classPrint.getName() + "' is missing an empty constructor and could not be registered!");
         } catch (InstantiationException | IllegalAccessException | InvocationTargetException e) {
-            HuskyGadgetMod.logger().error("The print '" + classPrint.getName() + "' could not be registered due to a critical error!");
+            HuskysGadgetMod.LOGGER.error("The print '" + classPrint.getName() + "' could not be registered due to a critical error!");
         }
     }
 
@@ -52,13 +49,13 @@ public class PrintingManager {
         return null;
     }
 
-    @SideOnly(Side.CLIENT)
+    @OnlyIn(Dist.CLIENT)
     public static IPrint.Renderer getRenderer(IPrint print) {
         String id = getPrintIdentifier(print);
         return registeredRenders.get(id);
     }
 
-    @SideOnly(Side.CLIENT)
+    @OnlyIn(Dist.CLIENT)
     public static IPrint.Renderer getRenderer(String identifier) {
         return registeredRenders.get(identifier);
     }

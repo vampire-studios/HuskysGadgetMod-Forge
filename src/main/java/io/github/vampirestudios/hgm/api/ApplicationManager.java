@@ -36,7 +36,7 @@ public final class ApplicationManager {
      */
     @Nullable
     public static Application registerApplication(ResourceLocation identifier, Class<? extends Application> clazz) {
-        Application application = HuskysGadgetMod.registerApplication(identifier, clazz);
+        Application application = HuskysGadgetMod.setup.registerApplication(identifier, clazz);
         if (application != null) {
             APP_INFO.put(identifier, application.getInfo());
             return application;
@@ -50,7 +50,7 @@ public final class ApplicationManager {
      * @return the application list
      */
     public static List<AppInfo> getAvailableApplications() {
-        final Predicate<AppInfo> FILTER = info -> !info.isSystemApp() && (!HuskysGadgetMod.hasAllowedApplications() || HuskysGadgetMod.getAllowedApplications().contains(info));
+        final Predicate<AppInfo> FILTER = info -> !info.isSystemApp() && (!HuskysGadgetMod.setup.hasAllowedApplications() || HuskysGadgetMod.setup.getAllowedApplications().contains(info));
         return APP_INFO.values().stream().filter(FILTER).collect(Collectors.toList());
     }
 

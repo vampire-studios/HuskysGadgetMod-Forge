@@ -73,7 +73,7 @@ public class Inventory extends Component {
                     if (RenderUtil.isMouseInside(mouseX, mouseY, x, y, x + 18, y + 18)) {
                         ItemStack stack = mc.player.inventory.getStackInSlot((i * 9) + j + 9);
                         if (!stack.isEmpty())
-                            laptop.drawHoveringText(Collections.singletonList(stack.getDisplayName().getFormattedText()), mouseX, mouseY);
+                            laptop.renderTooltip(Collections.singletonList(stack.getDisplayName().getFormattedText()), mouseX, mouseY);
                         return;
                     }
                 }

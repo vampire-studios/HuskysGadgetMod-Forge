@@ -1,6 +1,6 @@
 package io.github.vampirestudios.hgm.network.task;
 
-import io.github.vampirestudios.gadget.tileentity.TileEntityRouter;
+import io.github.vampirestudios.hgm.block.entity.TileEntityRouter;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;

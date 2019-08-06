@@ -1,22 +1,27 @@
 package io.github.vampirestudios.hgm.block.entity;
 
-import io.github.vampirestudios.gadget.util.IColored;
-import net.minecraft.item.EnumDyeColor;
-import net.minecraft.nbt.NBTTagCompound;
+import io.github.vampirestudios.hgm.utils.IColored;
+import net.minecraft.item.DyeColor;
+import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.tileentity.TileEntityType;
 import net.minecraftforge.common.util.Constants;
 
 public class TileEntityServerTerminal extends TileEntitySync implements IColored {
 
-    private EnumDyeColor color = EnumDyeColor.WHITE;
+    private DyeColor color = DyeColor.WHITE;
 
     private byte rotation;
+
+    public TileEntityServerTerminal(TileEntityType<?> tileEntityTypeIn) {
+        super(tileEntityTypeIn);
+    }
 
     public void nextRotation() {
         rotation++;
         if (rotation > 7) {
             rotation = 0;
         }
-        pipeline.setByte("rotation", rotation);
+        pipeline.putByte("rotation", rotation);
         sync();
     }
 
@@ -25,38 +30,38 @@ public class TileEntityServerTerminal extends TileEntitySync implements IColored
     }
 
     @Override
-    public void readFromNBT(NBTTagCompound compound) {
-        super.readFromNBT(compound);
-        if (compound.hasKey("rotation", Constants.NBT.TAG_BYTE)) {
+    public void read(CompoundNBT compound) {
+        super.read(compound);
+        if (compound.contains("rotation", Constants.NBT.TAG_BYTE)) {
             rotation = compound.getByte("rotation");
         }
-        if (compound.hasKey("color", Constants.NBT.TAG_BYTE)) {
-            this.color = EnumDyeColor.byDyeDamage(compound.getByte("color"));
+        if (compound.contains("color", Constants.NBT.TAG_BYTE)) {
+            this.color = DyeColor.byId(compound.getByte("color"));
         }
     }
 
     @Override
-    public NBTTagCompound writeToNBT(NBTTagCompound compound) {
-        super.writeToNBT(compound);
-        compound.setByte("rotation", rotation);
-        compound.setByte("color", (byte) color.getDyeDamage());
+    public CompoundNBT write(CompoundNBT compound) {
+        super.write(compound);
+        compound.putByte("rotation", rotation);
+        compound.putByte("color", (byte) color.getId());
         return compound;
     }
 
     @Override
-    public NBTTagCompound writeSyncTag() {
-        NBTTagCompound tag = new NBTTagCompound();
-        tag.setByte("color", (byte) color.getDyeDamage());
+    public CompoundNBT writeSyncTag() {
+        CompoundNBT tag = new CompoundNBT();
+        tag.putByte("color", (byte) color.getId());
         return tag;
     }
 
     @Override
-    public EnumDyeColor getColor() {
+    public DyeColor getColor() {
         return color;
     }
 
     @Override
-    public void setColor(EnumDyeColor color) {
+    public void setColor(DyeColor color) {
         this.color = color;
     }
 

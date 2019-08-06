@@ -1,8 +1,8 @@
 package io.github.vampirestudios.hgm.utils;
 
+import com.mojang.blaze3d.platform.GlStateManager;
+import net.minecraft.client.MainWindow;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.ScaledResolution;
-import net.minecraft.client.renderer.GlStateManager;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.opengl.GL11;
 
@@ -22,10 +22,10 @@ public class GLHelper {
             height = y + height > scissor.y + scissor.height ? scissor.y + scissor.height - y : height;
         }
 
-        Minecraft mc = Minecraft.getMinecraft();
-        ScaledResolution resolution = new ScaledResolution(mc);
-        int scale = resolution.getScaleFactor();
-        GL11.glScissor(x * scale, mc.displayHeight - y * scale - height * scale, Math.max(0, width * scale), Math.max(0, height * scale));
+        Minecraft mc = Minecraft.getInstance();
+        MainWindow resolution = mc.mainWindow;
+        int scale = (int) resolution.getGuiScaleFactor();
+        GL11.glScissor(x * scale, mc.mainWindow.getScaledWidth() - y * scale - height * scale, Math.max(0, width * scale), Math.max(0, height * scale));
         scissorStack.push(new Scissor(x, y, width, height));
     }
 
@@ -39,10 +39,10 @@ public class GLHelper {
     private static void restoreScissor() {
         if (!scissorStack.isEmpty()) {
             Scissor scissor = scissorStack.peek();
-            Minecraft mc = Minecraft.getMinecraft();
-            ScaledResolution resolution = new ScaledResolution(mc);
-            int scale = resolution.getScaleFactor();
-            GL11.glScissor(scissor.x * scale, mc.displayHeight - scissor.y * scale - scissor.height * scale, Math.max(0, scissor.width * scale), Math.max(0, scissor.height * scale));
+            Minecraft mc = Minecraft.getInstance();
+            MainWindow resolution = mc.mainWindow;
+            int scale = (int) resolution.getGuiScaleFactor();
+            GL11.glScissor(scissor.x * scale, mc.mainWindow.getScaledWidth() - scissor.y * scale - scissor.height * scale, Math.max(0, scissor.width * scale), Math.max(0, scissor.height * scale));
         }
     }
 
@@ -58,11 +58,11 @@ public class GLHelper {
     }
 
     public static Color getPixel(int x, int y) {
-        Minecraft mc = Minecraft.getMinecraft();
-        ScaledResolution resolution = new ScaledResolution(mc);
-        int scale = resolution.getScaleFactor();
+        Minecraft mc = Minecraft.getInstance();
+        MainWindow resolution = mc.mainWindow;
+        int scale = (int) resolution.getGuiScaleFactor();
         FloatBuffer buffer = BufferUtils.createFloatBuffer(3);
-        GL11.glReadPixels(x * scale, mc.displayHeight - y * scale - scale, 1, 1, GL11.GL_RGB, GL11.GL_FLOAT, buffer);
+        GL11.glReadPixels(x * scale, mc.mainWindow.getScaledWidth() - y * scale - scale, 1, 1, GL11.GL_RGB, GL11.GL_FLOAT, buffer);
         return new Color(buffer.get(0), buffer.get(1), buffer.get(2));
     }
 
@@ -81,7 +81,7 @@ public class GLHelper {
      * @param color The new color to use
      */
     public static void color(int color) {
-        GlStateManager.color((float) ((color >> 16) & 0xFF) / 255, (float) ((color >> 8) & 0xFF) / 255, (float) ((color >> 0) & 0xFF) / 255, (float) ((color >> 24) & 0xFF) / 255);
+        GlStateManager.color4f((float) ((color >> 16) & 0xFF) / 255, (float) ((color >> 8) & 0xFF) / 255, (float) ((color >> 0) & 0xFF) / 255, (float) ((color >> 24) & 0xFF) / 255);
     }
 
     public static class Scissor {

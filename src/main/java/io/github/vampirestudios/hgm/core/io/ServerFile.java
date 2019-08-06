@@ -1,6 +1,6 @@
 package io.github.vampirestudios.hgm.core.io;
 
-import io.github.vampirestudios.gadget.api.app.Application;
+import io.github.vampirestudios.hgm.api.app.Application;
 import net.minecraft.nbt.CompoundNBT;
 
 import javax.annotation.Nullable;

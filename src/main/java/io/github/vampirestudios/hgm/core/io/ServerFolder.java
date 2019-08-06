@@ -25,7 +25,7 @@ public class ServerFolder extends ServerFile {
     public static ServerFolder fromTag(String name, CompoundNBT folderTag) {
         ServerFolder folder = new ServerFolder(name);
 
-        if (folderTag.hasKey("protected", Constants.NBT.TAG_BYTE))
+        if (folderTag.contains("protected", Constants.NBT.TAG_BYTE))
             folder.protect = folderTag.getBoolean("protected");
 
         CompoundNBT fileList = folderTag.getCompound("files");

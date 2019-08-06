@@ -1,6 +1,5 @@
 package io.github.vampirestudios.hgm.network;
 
-import io.github.vampirestudios.gadget.network.task.*;
 import io.github.vampirestudios.hgm.HuskysGadgetMod;
 import io.github.vampirestudios.hgm.network.task.*;
 import net.minecraft.util.ResourceLocation;
@@ -23,7 +22,7 @@ public class PacketHandler {
         INSTANCE.registerMessage(3, MessageSyncApplications.class, MessageSyncApplications::encode, MessageSyncApplications::decode, MessageSyncApplications::received);
         INSTANCE.registerMessage(4, MessageSyncConfig.class, MessageSyncConfig::encode, MessageSyncConfig::decode, MessageSyncConfig::received);
         INSTANCE.registerMessage(5, MessageSyncBlock.class, MessageSyncBlock::encode, MessageSyncBlock::decode, MessageSyncBlock::received);
-        INSTANCE.registerMessage(6, MessageNotification.class, MessageNotification.class, 6, Side.CLIENT);
+        INSTANCE.registerMessage(6, MessageNotification.class, MessageNotification::encode, MessageNotification::decode, MessageNotification::received);
     }
 
 }

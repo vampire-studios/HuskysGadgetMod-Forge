@@ -107,7 +107,7 @@ public class Banner extends Component {
                 GlStateManager.bindTexture(image.textureId);
 
                 if (hasBorder) {
-                    drawRect(xPosition, yPosition, xPosition + componentWidth, yPosition + componentHeight, borderColour);
+                    fill(xPosition, yPosition, xPosition + componentWidth, yPosition + componentHeight, borderColour);
                     GlStateManager.color4f(1.0F, 1.0F, 1.0F, alpha);
                     if (drawFull) {
                         RenderUtil.drawRectWithFullTexture(xPosition + borderThickness, yPosition + borderThickness, imageU, imageV, componentWidth - borderThickness * 2, componentHeight - borderThickness * 2);
@@ -122,7 +122,7 @@ public class Banner extends Component {
                     }
                 }
             } else {
-                drawRect(xPosition, yPosition, xPosition + componentWidth, yPosition + componentHeight, Color.LIGHT_GRAY.getRGB());
+                fill(xPosition, yPosition, xPosition + componentWidth, yPosition + componentHeight, Color.LIGHT_GRAY.getRGB());
             }
         }
 

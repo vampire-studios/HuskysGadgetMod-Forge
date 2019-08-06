@@ -69,6 +69,8 @@ public class GadgetBlocks {
     public static final Block RED_PRINTER = new BlockRoofLights(DyeColor.RED);
     public static final Block BLACK_PRINTER = new BlockRoofLights(DyeColor.BLACK);
 
+    public static final Block PAPER = new BlockPaper();
+
     @SubscribeEvent
     public static void onBlocksRegistry(final RegistryEvent.Register<Block> event) {
         event.getRegistry().registerAll(
@@ -125,7 +127,9 @@ public class GadgetBlocks {
                 BROWN_PRINTER,
                 GREEN_PRINTER,
                 RED_PRINTER,
-                BLACK_PRINTER
+                BLACK_PRINTER,
+
+                PAPER
         );
     }
 
@@ -185,7 +189,9 @@ public class GadgetBlocks {
                 new CustomBlockItem(BROWN_PRINTER, HuskysGadgetMod.deviceBlocks),
                 new CustomBlockItem(GREEN_PRINTER, HuskysGadgetMod.deviceBlocks),
                 new CustomBlockItem(RED_PRINTER, HuskysGadgetMod.deviceBlocks),
-                new CustomBlockItem(BLACK_PRINTER, HuskysGadgetMod.deviceBlocks)
+                new CustomBlockItem(BLACK_PRINTER, HuskysGadgetMod.deviceBlocks),
+
+                new CustomBlockItem(PAPER, HuskysGadgetMod.deviceBlocks)
         );
     }
 

@@ -140,7 +140,7 @@ public class LinkedLabel extends Component {
     @Override
     public void renderOverlay(BaseDevice laptop, Minecraft mc, int mouseX, int mouseY, boolean windowActive) {
         if (this.hovered && this.toolTip != null && toolTipTick >= TOOLTIP_DELAY) {
-            laptop.drawHoveringText(Arrays.asList(TextFormatting.GOLD + this.toolTipTitle, this.toolTip), mouseX, mouseY);
+            laptop.renderTooltip(Arrays.asList(TextFormatting.GOLD + this.toolTipTitle, this.toolTip), mouseX, mouseY);
         }
     }
 

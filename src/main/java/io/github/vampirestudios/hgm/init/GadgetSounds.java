@@ -1,6 +1,5 @@
 package io.github.vampirestudios.hgm.init;
 
-import io.github.vampirestudios.gadget.Reference;
 import io.github.vampirestudios.hgm.HuskysGadgetMod;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
@@ -20,16 +19,16 @@ public class GadgetSounds {
 
 
     static {
-        PRINTER_PRINTING = registerSound(Reference.RESOURCE_PREFIX + "printing_ink");
-        PRINTER_LOADING_PAPER = registerSound(Reference.RESOURCE_PREFIX + "printing_paper");
-        FANS_BLOWING = registerSound(Reference.RESOURCE_PREFIX + "fans_blowing");
-        ZAP = registerSound(Reference.RESOURCE_PREFIX + "zap");
-        LASER = registerSound(Reference.RESOURCE_PREFIX + "lasers");
+        PRINTER_PRINTING = registerSound("printing_ink");
+        PRINTER_LOADING_PAPER = registerSound("printing_paper");
+        FANS_BLOWING = registerSound("fans_blowing");
+        ZAP = registerSound("zap");
+        LASER = registerSound("lasers");
     }
 
     private static SoundEvent registerSound(String soundNameIn) {
-        ResourceLocation resource = new ResourceLocation(soundNameIn);
-        SoundEvent sound = new SoundEvent(resource).setRegistryName(soundNameIn);
+        ResourceLocation resource = new ResourceLocation(HuskysGadgetMod.MOD_ID, soundNameIn);
+        SoundEvent sound = new SoundEvent(resource).setRegistryName(HuskysGadgetMod.MOD_ID, soundNameIn);
         RegistrationHandler.SOUNDS.add(sound);
         return sound;
     }

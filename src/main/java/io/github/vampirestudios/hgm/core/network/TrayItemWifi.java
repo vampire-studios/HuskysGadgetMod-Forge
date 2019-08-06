@@ -1,19 +1,19 @@
 package io.github.vampirestudios.hgm.core.network;
 
-import io.github.vampirestudios.gadget.api.task.TaskManager;
-import io.github.vampirestudios.gadget.core.network.task.TaskConnect;
-import io.github.vampirestudios.gadget.core.network.task.TaskPing;
-import io.github.vampirestudios.gadget.tileentity.TileEntityDevice;
-import io.github.vampirestudios.gadget.tileentity.TileEntityRouter;
 import io.github.vampirestudios.hgm.DeviceConfig;
 import io.github.vampirestudios.hgm.api.app.Layout;
 import io.github.vampirestudios.hgm.api.app.component.Button;
 import io.github.vampirestudios.hgm.api.app.component.ItemList;
 import io.github.vampirestudios.hgm.api.app.emojies.Icons;
 import io.github.vampirestudios.hgm.api.app.renderer.ListItemRenderer;
+import io.github.vampirestudios.hgm.api.task.TaskManager;
 import io.github.vampirestudios.hgm.api.utils.RenderUtil;
+import io.github.vampirestudios.hgm.block.entity.TileEntityDevice;
+import io.github.vampirestudios.hgm.block.entity.TileEntityRouter;
 import io.github.vampirestudios.hgm.core.BaseDevice;
 import io.github.vampirestudios.hgm.core.Device;
+import io.github.vampirestudios.hgm.core.network.task.TaskConnect;
+import io.github.vampirestudios.hgm.core.network.task.TaskPing;
 import io.github.vampirestudios.hgm.object.TrayItem;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screen.Screen;
@@ -38,14 +38,14 @@ public class TrayItemWifi extends TrayItem {
     private static Layout createWifiMenu(TrayItem item) {
         Layout layout = new Layout.Context(100, 100);
         layout.setBackground((gui, mc, x, y, width, height, mouseX, mouseY, windowActive) ->
-                Screen.drawRect(x, y, x + width, y + height, new Color(0.65F, 0.65F, 0.65F, 0.9F).getRGB()));
+                Screen.fill(x, y, x + width, y + height, new Color(0.65F, 0.65F, 0.65F, 0.9F).getRGB()));
 
         ItemList<Device> itemListRouters = new ItemList<>(5, 5, 90, 4);
         itemListRouters.setItems(getRouters());
         itemListRouters.setListItemRenderer(new ListItemRenderer<Device>(16) {
             @Override
             public void render(Device device, Screen gui, Minecraft mc, int x, int y, int width, int height, boolean selected) {
-                Screen.drawRect(x, y, x + width, y + height, selected ? Color.DARK_GRAY.getRGB() : Color.GRAY.getRGB());
+                Screen.fill(x, y, x + width, y + height, selected ? Color.DARK_GRAY.getRGB() : Color.GRAY.getRGB());
                 RenderUtil.drawStringClipped(device.getName(), x + 16, y + 4, 70, Color.WHITE.getRGB(), false);
 
                 if (device.getPos() == null)
@@ -140,7 +140,7 @@ public class TrayItemWifi extends TrayItem {
         task.setCallback((tagCompound, success) ->
         {
             if (success) {
-                int strength = tagCompound.getInteger("strength");
+                int strength = tagCompound.getInt("strength");
                 switch (strength) {
                     case 2:
                         setIcon(Icons.WIFI_LOW);

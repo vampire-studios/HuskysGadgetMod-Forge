@@ -4,7 +4,6 @@ import io.github.vampirestudios.hgm.api.app.Component;
 import io.github.vampirestudios.hgm.api.app.Layout;
 import io.github.vampirestudios.hgm.core.BaseDevice;
 import net.minecraft.client.Minecraft;
-import org.lwjgl.input.Mouse;
 
 import java.text.DecimalFormat;
 
@@ -77,7 +76,7 @@ public class NumberSelector extends Component {
 
     @Override
     public void handleTick() {
-        if (Mouse.isButtonDown(0)) {
+        if (Minecraft.getInstance().mouseHelper.isLeftDown()) {
             if (holding) {
                 btnUp.handleMouseClick(0, 0, 0);
                 btnDown.handleMouseClick(0, 0, 0);
