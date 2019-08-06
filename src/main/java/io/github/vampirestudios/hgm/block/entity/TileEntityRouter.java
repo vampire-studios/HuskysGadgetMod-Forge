@@ -1,5 +1,6 @@
 package io.github.vampirestudios.hgm.block.entity;
 
+import io.github.vampirestudios.hgm.HuskysGadgetMod;
 import io.github.vampirestudios.hgm.core.network.Router;
 import io.github.vampirestudios.hgm.init.GadgetTileEntities;
 import io.github.vampirestudios.hgm.utils.IColored;
@@ -47,6 +48,7 @@ public class TileEntityRouter extends TileEntitySync implements ITickableTileEnt
 
     @OnlyIn(Dist.CLIENT)
     public void setDebug() {
+        HuskysGadgetMod.LOGGER.info("Debug mode activated");
         if (debugTimer <= 0) {
             debugTimer = 1200;
         } else {

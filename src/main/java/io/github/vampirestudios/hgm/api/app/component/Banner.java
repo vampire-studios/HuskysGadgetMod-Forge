@@ -8,7 +8,6 @@ import io.github.vampirestudios.hgm.core.BaseDevice;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.SimpleTexture;
 import net.minecraft.client.renderer.texture.Texture;
-import net.minecraft.client.renderer.texture.TextureUtil;
 import net.minecraft.resources.IResourceManager;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
@@ -230,7 +229,7 @@ public class Banner extends Component {
 
         @Override
         public CachedImage load(Banner image) {
-            if (CACHE.containsKey(resource)) {
+            /*if (CACHE.containsKey(resource)) {
                 return CACHE.get(resource);
             }
 
@@ -241,7 +240,8 @@ public class Banner extends Component {
                 return cachedImage;
             } catch (IOException e) {
                 return new CachedImage(TextureUtil.MISSING_TEXTURE.getGlTextureId(), 0, 0);
-            }
+            }*/
+            return null;
         }
     }
 
@@ -277,7 +277,7 @@ public class Banner extends Component {
 
         @Override
         public CachedImage load(Banner image) {
-            if (CACHE.containsKey(url)) {
+            /*if (CACHE.containsKey(url)) {
                 CachedImage cachedImage = CACHE.get(url);
                 image.imageWidth = cachedImage.width;
                 image.imageHeight = cachedImage.height;
@@ -291,7 +291,8 @@ public class Banner extends Component {
                 return cachedImage;
             } catch (IOException e) {
                 return new CachedImage(TextureUtil.MISSING_TEXTURE.getGlTextureId(), 0, 0);
-            }
+            }*/
+            return null;
         }
     }
 
@@ -304,7 +305,7 @@ public class Banner extends Component {
 
         @Override
         public void loadTexture(IResourceManager resourceManager) throws IOException {
-            TextureUtil.uploadTextureImageAllocate(getGlTextureId(), image, false, true);
+//            TextureUtil.uploadTextureImageAllocate(getGlTextureId(), image, false, true);
         }
     }
 

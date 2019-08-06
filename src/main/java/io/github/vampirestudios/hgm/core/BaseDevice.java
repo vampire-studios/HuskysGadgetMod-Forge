@@ -37,6 +37,7 @@ import net.minecraft.nbt.StringNBT;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.common.util.Constants;
 import org.lwjgl.glfw.GLFW;
@@ -116,7 +117,7 @@ public class BaseDevice extends Screen implements System {
     private String wallpaperOrColor, taskbarPlacement, os;
 
     public BaseDevice(TileEntityBaseDevice te, int id, OperatingSystem OS) {
-        super(null);
+        super(new StringTextComponent("Device"));
         ID = id;
         this.appData = te.getApplicationData();
         this.systemData = te.getSystemData();
@@ -216,6 +217,41 @@ public class BaseDevice extends Screen implements System {
 
     public static Layout getContext() {
         return context;
+    }
+
+    @Override
+    public boolean mouseClicked(double p_mouseClicked_1_, double p_mouseClicked_3_, int p_mouseClicked_5_) {
+        return false;
+    }
+
+    @Override
+    public boolean mouseReleased(double p_mouseReleased_1_, double p_mouseReleased_3_, int p_mouseReleased_5_) {
+        return false;
+    }
+
+    @Override
+    public boolean mouseDragged(double p_mouseDragged_1_, double p_mouseDragged_3_, int p_mouseDragged_5_, double p_mouseDragged_6_, double p_mouseDragged_8_) {
+        return false;
+    }
+
+    @Override
+    public boolean mouseScrolled(double p_mouseScrolled_1_, double p_mouseScrolled_3_, double p_mouseScrolled_5_) {
+        return false;
+    }
+
+    @Override
+    public void mouseMoved(double p_212927_1_, double p_212927_3_) {
+
+    }
+
+    @Override
+    public boolean keyPressed(int p_keyPressed_1_, int p_keyPressed_2_, int p_keyPressed_3_) {
+        return super.keyPressed(p_keyPressed_1_, p_keyPressed_2_, p_keyPressed_3_);
+    }
+
+    @Override
+    public boolean keyReleased(int p_223281_1_, int p_223281_2_, int p_223281_3_) {
+        return false;
     }
 
     /*@Override

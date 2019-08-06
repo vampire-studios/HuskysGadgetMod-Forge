@@ -1,3 +1,4 @@
+/*
 package io.github.vampirestudios.hgm;
 
 import net.minecraft.nbt.CompoundNBT;
@@ -105,4 +106,4 @@ public class DeviceConfig {
             init();
         }
     }
-}
+}*/

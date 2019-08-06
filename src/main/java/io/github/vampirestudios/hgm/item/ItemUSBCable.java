@@ -1,5 +1,6 @@
 package io.github.vampirestudios.hgm.item;
 
+import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
@@ -33,12 +34,12 @@ public class ItemUSBCable extends BaseItem {
                 tooltip.add(new StringTextComponent(builder.toString()));
             }
         } else {
-//            if (!GuiScreen.isShiftKeyDown()) {
-//                tooltip.add(new StringTextComponent(TextFormatting.GRAY.toString() + "Use this cable to connect"));
-//                tooltip.add(new StringTextComponent(TextFormatting.GRAY.toString() + "a device to either a drawing tablet or a server terminal."));
-//                tooltip.add(TextFormatting.YELLOW.toString() + "Hold SHIFT for How-To");
-//                return;
-//            }
+            if (!Screen.hasShiftDown()) {
+                tooltip.add(new StringTextComponent(TextFormatting.GRAY.toString() + "Use this cable to connect"));
+                tooltip.add(new StringTextComponent(TextFormatting.GRAY.toString() + "a device to either a drawing tablet or a server terminal."));
+                tooltip.add(new StringTextComponent(TextFormatting.YELLOW.toString() + "Hold SHIFT for How-To"));
+                return;
+            }
 
             tooltip.add(new StringTextComponent(TextFormatting.GRAY.toString() + "Start by right clicking a"));
             tooltip.add(new StringTextComponent(TextFormatting.GRAY.toString() + "device with this cable"));

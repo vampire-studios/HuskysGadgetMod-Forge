@@ -1,6 +1,6 @@
 package io.github.vampirestudios.hgm.core.network;
 
-import io.github.vampirestudios.hgm.DeviceConfig;
+import io.github.vampirestudios.hgm.Config;
 import io.github.vampirestudios.hgm.block.entity.TileEntityNetworkDevice;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.nbt.ListNBT;
@@ -41,25 +41,25 @@ public class Router {
     }
 
     public void update(World world) {
-        if (++timer >= DeviceConfig.getBeaconInterval()) {
+        if (++timer >= Config.getBeaconInterval()) {
             sendBeacon(world);
             timer = 0;
         }
     }
 
     public boolean addDevice(UUID id, String name) {
-        if (NETWORK_DEVICES.size() >= DeviceConfig.getMaxDevices()) {
+        if (NETWORK_DEVICES.size() >= Config.getMaxDevices()) {
             return NETWORK_DEVICES.containsKey(id);
         }
         if (!NETWORK_DEVICES.containsKey(id)) {
             NETWORK_DEVICES.put(id, new NetworkDevice(id, name, this));
         }
-        timer += DeviceConfig.getBeaconInterval();
+        timer += Config.getBeaconInterval();
         return true;
     }
 
     public boolean addDevice(TileEntityNetworkDevice device) {
-        if (NETWORK_DEVICES.size() >= DeviceConfig.getMaxDevices()) {
+        if (NETWORK_DEVICES.size() >= Config.getMaxDevices()) {
             return NETWORK_DEVICES.containsKey(device.getId());
         }
         if (!NETWORK_DEVICES.containsKey(device.getId())) {
@@ -110,7 +110,7 @@ public class Router {
             return;
 
         NETWORK_DEVICES.forEach((id, device) -> device.setPos(null));
-        int range = DeviceConfig.getSignalRange();
+        int range = Config.getSignalRange();
         for (int y = -range; y < range + 1; y++) {
             for (int z = -range; z < range + 1; z++) {
                 for (int x = -range; x < range + 1; x++) {

@@ -1,7 +1,7 @@
 package io.github.vampirestudios.hgm.core.client;
 
 import com.mojang.blaze3d.platform.GlStateManager;
-import io.github.vampirestudios.hgm.DeviceConfig;
+import io.github.vampirestudios.hgm.Config;
 import io.github.vampirestudios.hgm.api.print.IPrint;
 import io.github.vampirestudios.hgm.api.print.PrintingManager;
 import io.github.vampirestudios.hgm.block.BlockPaper;
@@ -105,11 +105,11 @@ public class PaperRenderer extends TileEntityRenderer<TileEntityPaper> {
                 CompoundNBT data = print.toTag();
                 if (data.contains("pixels", Constants.NBT.TAG_INT_ARRAY) && data.contains("resolution", Constants.NBT.TAG_INT)) {
                     Minecraft.getInstance().getTextureManager().bindTexture(PrinterRenderer.ModelPaper.TEXTURE);
-                    if (DeviceConfig.isRenderPrinted3D() && !data.getBoolean("cut")) {
+                    if (Config.isRenderPrinted3D() && !data.getBoolean("cut")) {
                         drawCuboid(0, 0, 0, 16, 16, 1);
                     }
 
-                    GlStateManager.translated(0, 0, DeviceConfig.isRenderPrinted3D() ? 0.0625 : 0.001);
+                    GlStateManager.translated(0, 0, Config.isRenderPrinted3D() ? 0.0625 : 0.001);
 
                     GlStateManager.pushMatrix();
                     {
@@ -120,7 +120,7 @@ public class PaperRenderer extends TileEntityRenderer<TileEntityPaper> {
 
                     GlStateManager.pushMatrix();
                     {
-                        if (DeviceConfig.isRenderPrinted3D() && data.getBoolean("cut")) {
+                        if (Config.isRenderPrinted3D() && data.getBoolean("cut")) {
                             CompoundNBT tag = print.toTag();
                             drawPixels(tag.getIntArray("pixels"), tag.getInt("resolution"), tag.getBoolean("cut"));
                         }

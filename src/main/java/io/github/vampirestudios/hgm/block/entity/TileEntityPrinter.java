@@ -1,6 +1,6 @@
 package io.github.vampirestudios.hgm.block.entity;
 
-import io.github.vampirestudios.hgm.DeviceConfig;
+import io.github.vampirestudios.hgm.Config;
 import io.github.vampirestudios.hgm.api.print.IPrint;
 import io.github.vampirestudios.hgm.block.BlockPrinter;
 import io.github.vampirestudios.hgm.init.GadgetSounds;
@@ -248,8 +248,8 @@ public class TileEntityPrinter extends TileEntityNetworkDevice.Colored {
 
         state = newState;
         if (state == State.PRINTING) {
-            if (DeviceConfig.isOverridePrintSpeed()) {
-                remainingPrintTime = DeviceConfig.getCustomPrintSpeed() * 20;
+            if (Config.isOverridePrintSpeed()) {
+                remainingPrintTime = Config.getCustomPrintSpeed() * 20;
             } else {
                 remainingPrintTime = currentPrint.speed() * 20;
             }
@@ -297,7 +297,7 @@ public class TileEntityPrinter extends TileEntityNetworkDevice.Colored {
     }
 
     public boolean addPaper(ItemStack stack, boolean addAll) {
-        if (!stack.isEmpty() && stack.getItem() == Items.PAPER && paperCount < DeviceConfig.getMaxPaperCount()) {
+        if (!stack.isEmpty() && stack.getItem() == Items.PAPER && paperCount < Config.getMaxPaperCount()) {
             if (!addAll) {
                 paperCount++;
                 stack.shrink(1);

@@ -14,10 +14,12 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.Hand;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
+import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
 
@@ -26,11 +28,11 @@ import javax.annotation.Nullable;
 public class BlockPaper extends BlockFacing {
 
     private static final Bounds SELECTION_BOUNDS = new Bounds(15 * 0.0625, 0.0, 0.0, 16 * 0.0625, 16 * 0.0625, 16 * 0.0625);
-    private static final VoxelShape SELECTION_BOX_NORTH = CollisionHelper.getBlockBounds(Direction.NORTH, SELECTION_BOUNDS);
-    private static final VoxelShape SELECTION_BOX_EAST = CollisionHelper.getBlockBounds(Direction.EAST, SELECTION_BOUNDS);
-    private static final VoxelShape SELECTION_BOX_SOUTH = CollisionHelper.getBlockBounds(Direction.SOUTH, SELECTION_BOUNDS);
-    private static final VoxelShape SELECTION_BOX_WEST = CollisionHelper.getBlockBounds(Direction.WEST, SELECTION_BOUNDS);
-    private static final VoxelShape[] SELECTION_BOUNDING_BOX = {SELECTION_BOX_SOUTH, SELECTION_BOX_WEST, SELECTION_BOX_NORTH, SELECTION_BOX_EAST};
+    private static final AxisAlignedBB SELECTION_BOX_NORTH = CollisionHelper.getBlockBounds(Direction.NORTH, SELECTION_BOUNDS);
+    private static final AxisAlignedBB SELECTION_BOX_EAST = CollisionHelper.getBlockBounds(Direction.EAST, SELECTION_BOUNDS);
+    private static final AxisAlignedBB SELECTION_BOX_SOUTH = CollisionHelper.getBlockBounds(Direction.SOUTH, SELECTION_BOUNDS);
+    private static final AxisAlignedBB SELECTION_BOX_WEST = CollisionHelper.getBlockBounds(Direction.WEST, SELECTION_BOUNDS);
+    private static final AxisAlignedBB[] SELECTION_BOUNDING_BOX = {SELECTION_BOX_SOUTH, SELECTION_BOX_WEST, SELECTION_BOX_NORTH, SELECTION_BOX_EAST};
 
     public BlockPaper() {
         super("paper", Material.WOOL);
@@ -38,12 +40,12 @@ public class BlockPaper extends BlockFacing {
 
     @Override
     public VoxelShape getCollisionShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
-        return null;
+        return VoxelShapes.empty();
     }
 
     @Override
     public VoxelShape getRaytraceShape(BlockState state, IBlockReader worldIn, BlockPos pos) {
-        return SELECTION_BOUNDING_BOX[state.get(FACING).getHorizontalIndex()];
+        return VoxelShapes.create(SELECTION_BOUNDING_BOX[state.get(FACING).getHorizontalIndex()]);
     }
 
     @Nullable

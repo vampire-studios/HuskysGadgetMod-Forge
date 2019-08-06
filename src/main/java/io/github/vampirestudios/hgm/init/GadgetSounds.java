@@ -38,7 +38,7 @@ public class GadgetSounds {
         public static final List<SoundEvent> SOUNDS = new LinkedList<>();
 
         @SubscribeEvent
-        public static void registerItems(final RegistryEvent.Register<SoundEvent> event) {
+        public static void registerSounds(final RegistryEvent.Register<SoundEvent> event) {
             SOUNDS.forEach(sound -> event.getRegistry().register(sound));
         }
     }

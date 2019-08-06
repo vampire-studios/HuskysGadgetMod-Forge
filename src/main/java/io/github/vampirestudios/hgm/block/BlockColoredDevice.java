@@ -12,14 +12,16 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.Direction;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.world.World;
 
-public class BlockColoredDevice extends BlockColoredFacing {
+public abstract class BlockColoredDevice extends BlockColoredFacing {
 
     public BlockColoredDevice(String name, DyeColor color) {
         super(name, color);
+        this.setDefaultState(getDefaultState().with(FACING, Direction.NORTH));
     }
 
     @Override

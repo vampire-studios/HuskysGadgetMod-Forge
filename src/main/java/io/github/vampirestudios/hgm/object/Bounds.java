@@ -1,9 +1,8 @@
 package io.github.vampirestudios.hgm.object;
 
 import io.github.vampirestudios.hgm.utils.CollisionHelper;
-import net.minecraft.block.Block;
 import net.minecraft.util.Direction;
-import net.minecraft.util.math.shapes.VoxelShape;
+import net.minecraft.util.math.AxisAlignedBB;
 
 public class Bounds {
     public double x1, y1, z1;
@@ -32,20 +31,20 @@ public class Bounds {
         this.z2 = z2;
     }
 
-    public VoxelShape toAABB() {
-        return Block.makeCuboidShape(x1, y1, z1, x2, y2, z2);
+    public AxisAlignedBB toAABB() {
+        return new AxisAlignedBB(x1, y1, z1, x2, y2, z2);
     }
 
-    public VoxelShape getRotation(Direction facing) {
+    public AxisAlignedBB getRotation(Direction facing) {
         return CollisionHelper.getBlockBounds(facing, this);
     }
 
-    public VoxelShape[] getRotatedBounds() {
-        VoxelShape boundsNorth = CollisionHelper.getBlockBounds(Direction.NORTH, this);
-        VoxelShape boundsEast = CollisionHelper.getBlockBounds(Direction.EAST, this);
-        VoxelShape boundsSouth = CollisionHelper.getBlockBounds(Direction.SOUTH, this);
-        VoxelShape boundsWest = CollisionHelper.getBlockBounds(Direction.WEST, this);
-        return new VoxelShape[]{boundsSouth, boundsWest, boundsNorth, boundsEast};
+    public AxisAlignedBB[] getRotatedBounds() {
+        AxisAlignedBB boundsNorth = CollisionHelper.getBlockBounds(Direction.NORTH, this);
+        AxisAlignedBB boundsEast = CollisionHelper.getBlockBounds(Direction.EAST, this);
+        AxisAlignedBB boundsSouth = CollisionHelper.getBlockBounds(Direction.SOUTH, this);
+        AxisAlignedBB boundsWest = CollisionHelper.getBlockBounds(Direction.WEST, this);
+        return new AxisAlignedBB[]{boundsSouth, boundsWest, boundsNorth, boundsEast};
     }
 
 

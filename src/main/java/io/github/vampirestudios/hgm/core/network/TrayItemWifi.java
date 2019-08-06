@@ -1,6 +1,6 @@
 package io.github.vampirestudios.hgm.core.network;
 
-import io.github.vampirestudios.hgm.DeviceConfig;
+import io.github.vampirestudios.hgm.Config;
 import io.github.vampirestudios.hgm.api.app.Layout;
 import io.github.vampirestudios.hgm.api.app.component.Button;
 import io.github.vampirestudios.hgm.api.app.component.ItemList;
@@ -97,7 +97,7 @@ public class TrayItemWifi extends TrayItem {
 
         World world = Minecraft.getInstance().world;
         BlockPos laptopPos = BaseDevice.getPos();
-        int range = DeviceConfig.getSignalRange();
+        int range = Config.getSignalRange();
 
         for (int y = -range; y < range + 1; y++) {
             for (int z = -range; z < range + 1; z++) {
@@ -129,7 +129,7 @@ public class TrayItemWifi extends TrayItem {
 
     @Override
     public void tick() {
-        if (++pingTimer >= DeviceConfig.getPingRate()) {
+        if (++pingTimer >= Config.getPingRate()) {
             runPingTask();
             pingTimer = 0;
         }

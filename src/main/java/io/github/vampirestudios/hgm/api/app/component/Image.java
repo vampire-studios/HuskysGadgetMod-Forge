@@ -7,17 +7,14 @@ import io.github.vampirestudios.hgm.api.app.Layout;
 import io.github.vampirestudios.hgm.api.utils.RenderUtil;
 import io.github.vampirestudios.hgm.core.BaseDevice;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.texture.ITextureObject;
+import net.minecraft.client.renderer.texture.NativeImage;
 import net.minecraft.client.renderer.texture.SimpleTexture;
 import net.minecraft.client.renderer.texture.Texture;
-import net.minecraft.client.renderer.texture.TextureUtil;
 import net.minecraft.resources.IResourceManager;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
-import javax.imageio.ImageIO;
 import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -312,7 +309,7 @@ public class Image extends Component {
 
         @Override
         public CachedImage load(Image image) {
-            ITextureObject textureObj = Minecraft.getInstance().getTextureManager().getTexture(resource);
+            /*ITextureObject textureObj = Minecraft.getInstance().getTextureManager().getTexture(resource);
             if (textureObj != null) {
                 return new CachedImage(textureObj.getGlTextureId(), 0, 0, false);
             } else {
@@ -321,7 +318,8 @@ public class Image extends Component {
                     return new CachedImage(texture.getGlTextureId(), 0, 0, false);
                 }
                 return new CachedImage(TextureUtil.MISSING_TEXTURE.getGlTextureId(), 0, 0, false);
-            }
+            }*/
+            return null;
         }
     }
 
@@ -345,7 +343,7 @@ public class Image extends Component {
                     URL url = new URL(this.url);
                     HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                     conn.setRequestProperty("User-Agent", "Mozilla/5.0");
-                    BufferedImage bufferedImage = ImageIO.read(conn.getInputStream());
+                    NativeImage bufferedImage = NativeImage.read(conn.getInputStream());
                     image.imageWidth = bufferedImage.getWidth();
                     image.imageHeight = bufferedImage.getHeight();
                     texture = new DynamicTexture(bufferedImage);
@@ -360,7 +358,7 @@ public class Image extends Component {
 
         @Override
         public CachedImage load(Image image) {
-            if (CACHE.containsKey(url)) {
+            /*if (CACHE.containsKey(url)) {
                 CachedImage cachedImage = CACHE.get(url);
                 image.imageWidth = cachedImage.width;
                 image.imageHeight = cachedImage.height;
@@ -374,20 +372,21 @@ public class Image extends Component {
                 return cachedImage;
             } catch (IOException e) {
                 return new CachedImage(TextureUtil.MISSING_TEXTURE.getGlTextureId(), 0, 0, true);
-            }
+            }*/
+            return null;
         }
     }
 
     private static class DynamicTexture extends Texture {
-        private BufferedImage image;
+        private NativeImage image;
 
-        private DynamicTexture(BufferedImage image) {
+        private DynamicTexture(NativeImage image) {
             this.image = image;
         }
 
         @Override
         public void loadTexture(IResourceManager resourceManager) throws IOException {
-            TextureUtil.uploadTextureImageAllocate(getGlTextureId(), image, false, true);
+//            TextureUtil.uploadTextureImageAllocate(getGlTextureId(), image, false, true);
         }
     }
 

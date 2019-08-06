@@ -19,23 +19,23 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockRenderLayer;
 import net.minecraft.util.Direction;
 import net.minecraft.util.Hand;
+import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.shapes.ISelectionContext;
 import net.minecraft.util.math.shapes.VoxelShape;
+import net.minecraft.util.math.shapes.VoxelShapes;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
-
-import javax.annotation.Nullable;
 
 public class BlockRouter extends BlockColoredDevice {
 
     public static final BooleanProperty VERTICAL = BooleanProperty.create("vertical");
 
-    private static final VoxelShape[] BODY_BOUNDING_BOX = new Bounds(4, 0, 2, 12, 2, 14).getRotatedBounds();
-    private static final VoxelShape[] BODY_VERTICAL_BOUNDING_BOX = new Bounds(14, 1, 2, 16, 9, 14).getRotatedBounds();
-    private static final VoxelShape[] SELECTION_BOUNDING_BOX = new Bounds(3, 0, 1, 13, 3, 15).getRotatedBounds();
-    private static final VoxelShape[] SELECTION_VERTICAL_BOUNDING_BOX = new Bounds(13, 0, 1, 16, 10, 15).getRotatedBounds();
+    private static final AxisAlignedBB[] BODY_BOUNDING_BOX = new Bounds(4, 0, 2, 12, 2, 14).getRotatedBounds();
+    private static final AxisAlignedBB[] BODY_VERTICAL_BOUNDING_BOX = new Bounds(14, 1, 2, 16, 9, 14).getRotatedBounds();
+    private static final AxisAlignedBB[] SELECTION_BOUNDING_BOX = new Bounds(3, 0, 1, 13, 3, 15).getRotatedBounds();
+    private static final AxisAlignedBB[] SELECTION_VERTICAL_BOUNDING_BOX = new Bounds(13, 0, 1, 16, 10, 15).getRotatedBounds();
 
     public BlockRouter(DyeColor color) {
         super("router", color);
@@ -43,32 +43,19 @@ public class BlockRouter extends BlockColoredDevice {
     }
 
     @Override
-    public VoxelShape getShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
-        if (state.get(VERTICAL)) {
-            return SELECTION_VERTICAL_BOUNDING_BOX[state.get(FACING).getHorizontalIndex()];
-        }
-        return SELECTION_BOUNDING_BOX[state.get(FACING).getHorizontalIndex()];
-    }
-
-    @Override
     public VoxelShape getCollisionShape(BlockState state, IBlockReader worldIn, BlockPos pos, ISelectionContext context) {
-        return this.getShape(state, worldIn, pos, context);
+        if (state.get(VERTICAL)) {
+            return VoxelShapes.create(SELECTION_VERTICAL_BOUNDING_BOX[state.get(FACING).getHorizontalIndex()]);
+        }
+        return VoxelShapes.create(SELECTION_BOUNDING_BOX[state.get(FACING).getHorizontalIndex()]);
     }
 
     @Override
     public VoxelShape getRaytraceShape(BlockState state, IBlockReader worldIn, BlockPos pos) {
         if (state.get(VERTICAL)) {
-            return SELECTION_VERTICAL_BOUNDING_BOX[state.get(FACING).getHorizontalIndex()];
+            return VoxelShapes.create(SELECTION_VERTICAL_BOUNDING_BOX[state.get(FACING).getHorizontalIndex()]);
         }
-        return SELECTION_BOUNDING_BOX[state.get(FACING).getHorizontalIndex()];
-    }
-
-    @Override
-    public VoxelShape getRenderShape(BlockState state, IBlockReader worldIn, BlockPos pos) {
-        if (state.get(VERTICAL)) {
-            return SELECTION_VERTICAL_BOUNDING_BOX[state.get(FACING).getHorizontalIndex()];
-        }
-        return SELECTION_BOUNDING_BOX[state.get(FACING).getHorizontalIndex()];
+        return VoxelShapes.create(SELECTION_BOUNDING_BOX[state.get(FACING).getHorizontalIndex()]);
     }
 
     @Override
@@ -129,9 +116,8 @@ public class BlockRouter extends BlockColoredDevice {
         return side != EnumFacing.DOWN;
     }*/
 
-    @Nullable
     @Override
-    public TileEntity createTileEntity(BlockState state, IBlockReader world) {
+    public TileEntity createNewTileEntity(IBlockReader world) {
         return new TileEntityRouter();
     }
 

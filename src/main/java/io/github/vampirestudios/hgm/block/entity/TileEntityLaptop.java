@@ -1,5 +1,6 @@
 package io.github.vampirestudios.hgm.block.entity;
 
+import io.github.vampirestudios.hgm.init.GadgetTileEntities;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraftforge.api.distmarker.Dist;
@@ -18,7 +19,7 @@ public class TileEntityLaptop extends TileEntityBaseDevice {
     private int prevRotation;
 
     public TileEntityLaptop() {
-        super("Laptop", true, null);
+        super("Laptop", true, GadgetTileEntities.LAPTOPS);
     }
 
     @Override
