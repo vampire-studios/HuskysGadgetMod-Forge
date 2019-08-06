@@ -15,8 +15,6 @@ import java.util.List;
 
 public interface ColoredBlock extends IBlockColorProvider, IItemColorProvider {
 
-    DyeColor getDyeColor();
-
     static TextFormatting getFromColor(DyeColor color) {
         switch (color) {
             case ORANGE:
@@ -51,6 +49,8 @@ public interface ColoredBlock extends IBlockColorProvider, IItemColorProvider {
                 return TextFormatting.WHITE;
         }
     }
+
+    DyeColor getDyeColor();
 
     default void addInformation(List<ITextComponent> tooltip) {
         if (!Screen.hasShiftDown()) {

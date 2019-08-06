@@ -15,14 +15,13 @@ import java.util.Comparator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class AppInfo 
-{
-	public static final Comparator<AppInfo> SORT_NAME = Comparator.comparing(AppInfo::getName);
+public class AppInfo {
+    public static final Comparator<AppInfo> SORT_NAME = Comparator.comparing(AppInfo::getName);
 
-	private transient final ResourceLocation APP_ID;
-	private transient final boolean SYSTEM_APP;
-	private transient int iconU = 0;
-	private transient int iconV = 0;
+    private transient final ResourceLocation APP_ID;
+    private transient final boolean SYSTEM_APP;
+    private transient int iconU = 0;
+    private transient int iconV = 0;
 
     private String name;
     private String author;
@@ -35,39 +34,35 @@ public class AppInfo
     private String[] screenshots;
     private Support support;
 
-	public AppInfo(ResourceLocation appIdentifier, boolean isSystemApp)
-	{
-		this.APP_ID = appIdentifier;
-		this.SYSTEM_APP = isSystemApp;
-	}
+    public AppInfo(ResourceLocation appIdentifier, boolean isSystemApp) {
+        this.APP_ID = appIdentifier;
+        this.SYSTEM_APP = isSystemApp;
+    }
 
-	/**
-	 * Gets the id of the application
-	 *
-	 * @return the app resource location
-	 */
-	public ResourceLocation getId()
-	{
-		return APP_ID;
-	}
+    /**
+     * Gets the id of the application
+     *
+     * @return the app resource location
+     */
+    public ResourceLocation getId() {
+        return APP_ID;
+    }
 
-	/**
-	 * Gets the formatted version of the application's id
-	 *
-	 * @return a formatted id
-	 */
-	public String getFormattedId()
-	{
-		return APP_ID.getNamespace() + "." + APP_ID.getPath();
-	}
+    /**
+     * Gets the formatted version of the application's id
+     *
+     * @return a formatted id
+     */
+    public String getFormattedId() {
+        return APP_ID.getNamespace() + "." + APP_ID.getPath();
+    }
 
     /**
      * Gets the name of the application
      *
      * @return the application name
      */
-    public String getName()
-    {
+    public String getName() {
         return name;
     }
 
@@ -123,39 +118,35 @@ public class AppInfo
         return support;
     }
 
-	public boolean isSystemApp()
-	{
-		return SYSTEM_APP;
-	}
+    public boolean isSystemApp() {
+        return SYSTEM_APP;
+    }
 
-	@Override
-	public boolean equals(Object obj)
-	{
-		if(obj == null) return false;
-		if(!(obj instanceof AppInfo)) return false;
-		AppInfo info = (AppInfo) obj;
-		return this == info || getFormattedId().equals(info.getFormattedId());
-	}
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) return false;
+        if (!(obj instanceof AppInfo)) return false;
+        AppInfo info = (AppInfo) obj;
+        return this == info || getFormattedId().equals(info.getFormattedId());
+    }
 
-	public void reload()
-	{
-		resetInfo();
-		InputStream stream = ClientProxy.class.getResourceAsStream("/assets/" + APP_ID.getNamespace() + "/apps/" + APP_ID.getPath() + ".json");
+    public void reload() {
+        resetInfo();
+        InputStream stream = ClientProxy.class.getResourceAsStream("/assets/" + APP_ID.getNamespace() + "/apps/" + APP_ID.getPath() + ".json");
 
-		if(stream == null)
-			throw new RuntimeException("Missing app info json for '" + APP_ID + "'");
+        if (stream == null)
+            throw new RuntimeException("Missing app info json for '" + APP_ID + "'");
 
-		Reader reader = new InputStreamReader(stream);
-		JsonParser parser = new JsonParser();
-		JsonElement obj = parser.parse(reader);
-		GsonBuilder builder = new GsonBuilder();
-		builder.registerTypeAdapter(AppInfo.class, new AppInfo.Deserializer(this));
-		Gson gson = builder.create();
-		gson.fromJson(obj, AppInfo.class);
-	}
+        Reader reader = new InputStreamReader(stream);
+        JsonParser parser = new JsonParser();
+        JsonElement obj = parser.parse(reader);
+        GsonBuilder builder = new GsonBuilder();
+        builder.registerTypeAdapter(AppInfo.class, new AppInfo.Deserializer(this));
+        Gson gson = builder.create();
+        gson.fromJson(obj, AppInfo.class);
+    }
 
-	private void resetInfo()
-	{
+    private void resetInfo() {
         name = null;
         author = null;
         description = null;
@@ -164,39 +155,33 @@ public class AppInfo
         banner = null;
         screenshots = null;
         support = null;
-	}
+    }
 
-	public static class Support
-	{
-		private String paypal;
-		private String patreon;
-		private String twitter;
-		private String youtube;
+    public static class Support {
+        private String paypal;
+        private String patreon;
+        private String twitter;
+        private String youtube;
 
-		public String getPaypal()
-		{
-			return paypal;
-		}
+        public String getPaypal() {
+            return paypal;
+        }
 
-		public String getPatreon()
-		{
-			return patreon;
-		}
+        public String getPatreon() {
+            return patreon;
+        }
 
-		public String getTwitter()
-		{
-			return twitter;
-		}
+        public String getTwitter() {
+            return twitter;
+        }
 
-		public String getYoutube()
-		{
-			return youtube;
-		}
+        public String getYoutube() {
+            return youtube;
+        }
 
-	}
+    }
 
-	public static class Deserializer implements JsonDeserializer<AppInfo>
-	{
+    public static class Deserializer implements JsonDeserializer<AppInfo> {
         private static final Pattern LANG = Pattern.compile("\\$\\{[a-z]+}");
 
         private static final String NAME = "app_name";
@@ -278,11 +263,11 @@ public class AppInfo
 
         private String convertToLocal(String s) {
             Matcher m = LANG.matcher(s);
-            while(m.find()) {
+            while (m.find()) {
                 String found = m.group();
                 s = s.replace(found, I18n.format("app." + info.getFormattedId() + "." + found.substring(2, found.length() - 1)));
             }
             return s;
         }
-	}
+    }
 }

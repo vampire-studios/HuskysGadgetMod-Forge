@@ -2,7 +2,8 @@ package io.github.vampirestudios.hgm.init;
 
 import io.github.vampirestudios.hgm.HuskysGadgetMod;
 import io.github.vampirestudios.hgm.item.ItemMotherBoard;
-import net.minecraft.item.*;
+import net.minecraft.item.Food;
+import net.minecraft.item.Item;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.util.ResourceLocation;

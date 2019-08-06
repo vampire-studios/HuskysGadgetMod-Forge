@@ -6,7 +6,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 public interface IBlockColorProvider extends IItemColorProvider {
 
-	@OnlyIn(Dist.CLIENT)
-	public IBlockColor getBlockColor();
+    @OnlyIn(Dist.CLIENT)
+    IBlockColor getBlockColor();
 
 }

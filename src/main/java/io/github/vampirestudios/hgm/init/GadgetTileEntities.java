@@ -2,7 +2,9 @@ package io.github.vampirestudios.hgm.init;
 
 import io.github.vampirestudios.hgm.HuskysGadgetMod;
 import io.github.vampirestudios.hgm.block.entity.TileEntityEasterEgg;
+import io.github.vampirestudios.hgm.block.entity.TileEntityPrinter;
 import io.github.vampirestudios.hgm.block.entity.TileEntityRoofLights;
+import io.github.vampirestudios.hgm.block.entity.TileEntityRouter;
 import net.minecraft.tileentity.TileEntityType;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.RegistryEvent;
@@ -32,10 +34,50 @@ public class GadgetTileEntities {
             GadgetBlocks.RED_ROOF_LIGHT,
             GadgetBlocks.BLACK_ROOF_LIGHT
     ).build(null).setRegistryName(new ResourceLocation(HuskysGadgetMod.MOD_ID, "roof_light_be"));
+    public static final TileEntityType<TileEntityRouter> ROUTERS = (TileEntityType<TileEntityRouter>) TileEntityType.Builder.create(TileEntityRouter::new,
+            GadgetBlocks.WHITE_ROOF_LIGHT,
+            GadgetBlocks.ORANGE_ROOF_LIGHT,
+            GadgetBlocks.MAGENTA_ROOF_LIGHT,
+            GadgetBlocks.LIGHT_BLUE_ROOF_LIGHT,
+            GadgetBlocks.YELLOW_ROOF_LIGHT,
+            GadgetBlocks.LIME_ROOF_LIGHT,
+            GadgetBlocks.PINK_ROOF_LIGHT,
+            GadgetBlocks.GRAY_ROOF_LIGHT,
+            GadgetBlocks.LIGHT_GRAY_ROOF_LIGHT,
+            GadgetBlocks.CYAN_ROOF_LIGHT,
+            GadgetBlocks.PURPLE_ROOF_LIGHT,
+            GadgetBlocks.BLUE_ROOF_LIGHT,
+            GadgetBlocks.BROWN_ROOF_LIGHT,
+            GadgetBlocks.GREEN_ROOF_LIGHT,
+            GadgetBlocks.RED_ROOF_LIGHT,
+            GadgetBlocks.BLACK_ROOF_LIGHT
+    ).build(null).setRegistryName(new ResourceLocation(HuskysGadgetMod.MOD_ID, "router_be"));
+    public static final TileEntityType<TileEntityPrinter> PRINTERS = (TileEntityType<TileEntityPrinter>) TileEntityType.Builder.create(TileEntityPrinter::new,
+            GadgetBlocks.WHITE_ROOF_LIGHT,
+            GadgetBlocks.ORANGE_ROOF_LIGHT,
+            GadgetBlocks.MAGENTA_ROOF_LIGHT,
+            GadgetBlocks.LIGHT_BLUE_ROOF_LIGHT,
+            GadgetBlocks.YELLOW_ROOF_LIGHT,
+            GadgetBlocks.LIME_ROOF_LIGHT,
+            GadgetBlocks.PINK_ROOF_LIGHT,
+            GadgetBlocks.GRAY_ROOF_LIGHT,
+            GadgetBlocks.LIGHT_GRAY_ROOF_LIGHT,
+            GadgetBlocks.CYAN_ROOF_LIGHT,
+            GadgetBlocks.PURPLE_ROOF_LIGHT,
+            GadgetBlocks.BLUE_ROOF_LIGHT,
+            GadgetBlocks.BROWN_ROOF_LIGHT,
+            GadgetBlocks.GREEN_ROOF_LIGHT,
+            GadgetBlocks.RED_ROOF_LIGHT,
+            GadgetBlocks.BLACK_ROOF_LIGHT
+    ).build(null).setRegistryName(new ResourceLocation(HuskysGadgetMod.MOD_ID, "printer_be"));
 
     @SubscribeEvent
     public static void onBlocksRegistry(final RegistryEvent.Register<TileEntityType<?>> event) {
-        event.getRegistry().register(EASTER_EGG);
+        event.getRegistry().registerAll(
+                EASTER_EGG,
+                ROOF_LIGHTS,
+                ROUTERS
+        );
     }
 
 }
