@@ -10,7 +10,7 @@ import net.minecraft.util.Direction;
 public class BlockServerTerminal extends BlockDevice {
 
     public BlockServerTerminal() {
-        super(Material.ANVIL, "server_rack");
+        super(Material.ANVIL);
         setDefaultState(getDefaultState().with(FACING, Direction.NORTH));
 //        this.setCreativeTab(HuskyGadgetMod.deviceDecoration);
     }

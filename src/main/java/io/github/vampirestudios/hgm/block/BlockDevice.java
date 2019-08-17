@@ -23,8 +23,8 @@ import javax.annotation.Nullable;
 
 public abstract class BlockDevice extends BlockFacing {
 
-    protected BlockDevice(Material materialIn, String name) {
-        super(name, materialIn);
+    protected BlockDevice(Material materialIn) {
+        super(materialIn);
     }
 
     @Override

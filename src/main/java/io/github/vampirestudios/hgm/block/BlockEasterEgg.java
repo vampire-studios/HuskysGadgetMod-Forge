@@ -1,6 +1,5 @@
 package io.github.vampirestudios.hgm.block;
 
-import io.github.vampirestudios.hgm.HuskysGadgetMod;
 import io.github.vampirestudios.hgm.block.entity.TileEntityEasterEgg;
 import io.github.vampirestudios.hgm.init.GadgetItems;
 import net.minecraft.block.Block;
@@ -12,7 +11,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.BlockRenderLayer;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockReader;
 import net.minecraft.world.World;
@@ -23,7 +21,6 @@ public class BlockEasterEgg extends Block {
 
     public BlockEasterEgg() {
         super(Properties.create(Material.CARPET).hardnessAndResistance(1.0F, 1.0F));
-        this.setRegistryName(new ResourceLocation(HuskysGadgetMod.MOD_ID, "easter_egg"));
     }
 
     @Override

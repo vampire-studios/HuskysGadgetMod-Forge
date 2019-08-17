@@ -9,7 +9,7 @@ import net.minecraft.world.IBlockReader;
 public abstract class BlockDecoration extends BlockFacing {
 
     public BlockDecoration(Material materialIn, String name) {
-        super(name, materialIn);
+        super(materialIn);
     }
 
     @Override

@@ -10,7 +10,7 @@ import io.github.vampirestudios.hgm.core.client.PrinterRenderer;
 import io.github.vampirestudios.hgm.core.client.RouterRenderer;
 import io.github.vampirestudios.hgm.init.GadgetBlocks;
 import io.github.vampirestudios.hgm.init.GadgetItems;
-import io.github.vampirestudios.hgm.item.ItemColored;
+import io.github.vampirestudios.hgm.item.ColoredBlockItem;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.color.BlockColors;
 import net.minecraft.client.renderer.color.IBlockColor;
@@ -51,22 +51,154 @@ public class ClientProxy implements IProxy {
         ItemColors items = Minecraft.getInstance().getItemColors();
         BlockColors blocks = Minecraft.getInstance().getBlockColors();
 
-        IItemColor handlerItems = (s, t) -> t == 0 ? ((ItemColored) s.getItem()).color.getId() : 0xFFFFFF;
-        items.register(handlerItems, GadgetItems.FLASH_DRIVES);
+        IItemColor handlerItems = (s, t) -> t == 0 ? ((ColoredBlockItem) s.getItem()).color.getId() : 0xFFFFFF;
+//        items.register(handlerItems, GadgetItems.FLASH_DRIVES);
         items.register((stack, tintIndex) -> blocks.getColor(((BlockItem)stack.getItem()).getBlock().getDefaultState(), null, null, tintIndex),
-                GadgetBlocks.ROOF_LIGHTS);
+                GadgetBlocks.WHITE_ROOF_LIGHT,
+                GadgetBlocks.ORANGE_ROOF_LIGHT,
+                GadgetBlocks.MAGENTA_ROOF_LIGHT,
+                GadgetBlocks.LIGHT_BLUE_ROOF_LIGHT,
+                GadgetBlocks.YELLOW_ROOF_LIGHT,
+                GadgetBlocks.LIME_ROOF_LIGHT,
+                GadgetBlocks.PINK_ROOF_LIGHT,
+                GadgetBlocks.GRAY_ROOF_LIGHT,
+                GadgetBlocks.LIGHT_GRAY_ROOF_LIGHT,
+                GadgetBlocks.CYAN_ROOF_LIGHT,
+                GadgetBlocks.PURPLE_ROOF_LIGHT,
+                GadgetBlocks.BLUE_ROOF_LIGHT,
+                GadgetBlocks.BROWN_ROOF_LIGHT,
+                GadgetBlocks.GREEN_ROOF_LIGHT,
+                GadgetBlocks.RED_ROOF_LIGHT,
+                GadgetBlocks.BLACK_ROOF_LIGHT
+        );
         items.register((stack, tintIndex) -> blocks.getColor(((BlockItem)stack.getItem()).getBlock().getDefaultState(), null, null, tintIndex),
-                GadgetBlocks.ROUTERS);
+                GadgetBlocks.WHITE_ROUTER,
+                GadgetBlocks.ORANGE_ROUTER,
+                GadgetBlocks.MAGENTA_ROUTER,
+                GadgetBlocks.LIGHT_BLUE_ROUTER,
+                GadgetBlocks.YELLOW_ROUTER,
+                GadgetBlocks.LIME_ROUTER,
+                GadgetBlocks.PINK_ROUTER,
+                GadgetBlocks.GRAY_ROUTER,
+                GadgetBlocks.LIGHT_GRAY_ROUTER,
+                GadgetBlocks.CYAN_ROUTER,
+                GadgetBlocks.PURPLE_ROUTER,
+                GadgetBlocks.BLUE_ROUTER,
+                GadgetBlocks.BROWN_ROUTER,
+                GadgetBlocks.GREEN_ROUTER,
+                GadgetBlocks.RED_ROUTER,
+                GadgetBlocks.BLACK_ROUTER
+        );
         items.register((stack, tintIndex) -> blocks.getColor(((BlockItem)stack.getItem()).getBlock().getDefaultState(), null, null, tintIndex),
-                GadgetBlocks.PRINTERS);
+                GadgetBlocks.WHITE_PRINTER,
+                GadgetBlocks.ORANGE_PRINTER,
+                GadgetBlocks.MAGENTA_PRINTER,
+                GadgetBlocks.LIGHT_BLUE_PRINTER,
+                GadgetBlocks.YELLOW_PRINTER,
+                GadgetBlocks.LIME_PRINTER,
+                GadgetBlocks.PINK_PRINTER,
+                GadgetBlocks.GRAY_PRINTER,
+                GadgetBlocks.LIGHT_GRAY_PRINTER,
+                GadgetBlocks.CYAN_PRINTER,
+                GadgetBlocks.PURPLE_PRINTER,
+                GadgetBlocks.BLUE_PRINTER,
+                GadgetBlocks.BROWN_PRINTER,
+                GadgetBlocks.GREEN_PRINTER,
+                GadgetBlocks.RED_PRINTER,
+                GadgetBlocks.BLACK_PRINTER
+        );
         items.register((stack, tintIndex) -> blocks.getColor(((BlockItem)stack.getItem()).getBlock().getDefaultState(), null, null, tintIndex),
-                GadgetBlocks.LAPTOPS);
+                GadgetBlocks.WHITE_LAPTOP,
+                GadgetBlocks.ORANGE_LAPTOP,
+                GadgetBlocks.MAGENTA_LAPTOP,
+                GadgetBlocks.LIGHT_BLUE_LAPTOP,
+                GadgetBlocks.YELLOW_LAPTOP,
+                GadgetBlocks.LIME_LAPTOP,
+                GadgetBlocks.PINK_LAPTOP,
+                GadgetBlocks.GRAY_LAPTOP,
+                GadgetBlocks.LIGHT_GRAY_LAPTOP,
+                GadgetBlocks.CYAN_LAPTOP,
+                GadgetBlocks.PURPLE_LAPTOP,
+                GadgetBlocks.BLUE_LAPTOP,
+                GadgetBlocks.BROWN_LAPTOP,
+                GadgetBlocks.GREEN_LAPTOP,
+                GadgetBlocks.RED_LAPTOP,
+                GadgetBlocks.BLACK_LAPTOP
+        );
 
         IBlockColor handlerBlocks = (s, w, p, t) -> t == 0 ? ((BlockColored) s.getBlock()).color.getId() : 0xFFFFFF;
-        blocks.register(handlerBlocks, GadgetBlocks.ROOF_LIGHTS);
-        blocks.register(handlerBlocks, GadgetBlocks.ROUTERS);
-        blocks.register(handlerBlocks, GadgetBlocks.PRINTERS);
-        blocks.register(handlerBlocks, GadgetBlocks.LAPTOPS);
+        blocks.register(handlerBlocks,
+                GadgetBlocks.WHITE_ROOF_LIGHT,
+                GadgetBlocks.ORANGE_ROOF_LIGHT,
+                GadgetBlocks.MAGENTA_ROOF_LIGHT,
+                GadgetBlocks.LIGHT_BLUE_ROOF_LIGHT,
+                GadgetBlocks.YELLOW_ROOF_LIGHT,
+                GadgetBlocks.LIME_ROOF_LIGHT,
+                GadgetBlocks.PINK_ROOF_LIGHT,
+                GadgetBlocks.GRAY_ROOF_LIGHT,
+                GadgetBlocks.LIGHT_GRAY_ROOF_LIGHT,
+                GadgetBlocks.CYAN_ROOF_LIGHT,
+                GadgetBlocks.PURPLE_ROOF_LIGHT,
+                GadgetBlocks.BLUE_ROOF_LIGHT,
+                GadgetBlocks.BROWN_ROOF_LIGHT,
+                GadgetBlocks.GREEN_ROOF_LIGHT,
+                GadgetBlocks.RED_ROOF_LIGHT,
+                GadgetBlocks.BLACK_ROOF_LIGHT
+        );
+        blocks.register(handlerBlocks,
+                GadgetBlocks.WHITE_ROUTER,
+                GadgetBlocks.ORANGE_ROUTER,
+                GadgetBlocks.MAGENTA_ROUTER,
+                GadgetBlocks.LIGHT_BLUE_ROUTER,
+                GadgetBlocks.YELLOW_ROUTER,
+                GadgetBlocks.LIME_ROUTER,
+                GadgetBlocks.PINK_ROUTER,
+                GadgetBlocks.GRAY_ROUTER,
+                GadgetBlocks.LIGHT_GRAY_ROUTER,
+                GadgetBlocks.CYAN_ROUTER,
+                GadgetBlocks.PURPLE_ROUTER,
+                GadgetBlocks.BLUE_ROUTER,
+                GadgetBlocks.BROWN_ROUTER,
+                GadgetBlocks.GREEN_ROUTER,
+                GadgetBlocks.RED_ROUTER,
+                GadgetBlocks.BLACK_ROUTER
+        );
+        blocks.register(handlerBlocks,
+                GadgetBlocks.WHITE_PRINTER,
+                GadgetBlocks.ORANGE_PRINTER,
+                GadgetBlocks.MAGENTA_PRINTER,
+                GadgetBlocks.LIGHT_BLUE_PRINTER,
+                GadgetBlocks.YELLOW_PRINTER,
+                GadgetBlocks.LIME_PRINTER,
+                GadgetBlocks.PINK_PRINTER,
+                GadgetBlocks.GRAY_PRINTER,
+                GadgetBlocks.LIGHT_GRAY_PRINTER,
+                GadgetBlocks.CYAN_PRINTER,
+                GadgetBlocks.PURPLE_PRINTER,
+                GadgetBlocks.BLUE_PRINTER,
+                GadgetBlocks.BROWN_PRINTER,
+                GadgetBlocks.GREEN_PRINTER,
+                GadgetBlocks.RED_PRINTER,
+                GadgetBlocks.BLACK_PRINTER
+        );
+        blocks.register(handlerBlocks,
+                GadgetBlocks.WHITE_LAPTOP,
+                GadgetBlocks.ORANGE_LAPTOP,
+                GadgetBlocks.MAGENTA_LAPTOP,
+                GadgetBlocks.LIGHT_BLUE_LAPTOP,
+                GadgetBlocks.YELLOW_LAPTOP,
+                GadgetBlocks.LIME_LAPTOP,
+                GadgetBlocks.PINK_LAPTOP,
+                GadgetBlocks.GRAY_LAPTOP,
+                GadgetBlocks.LIGHT_GRAY_LAPTOP,
+                GadgetBlocks.CYAN_LAPTOP,
+                GadgetBlocks.PURPLE_LAPTOP,
+                GadgetBlocks.BLUE_LAPTOP,
+                GadgetBlocks.BROWN_LAPTOP,
+                GadgetBlocks.GREEN_LAPTOP,
+                GadgetBlocks.RED_LAPTOP,
+                GadgetBlocks.BLACK_LAPTOP
+        );
 
         TileEntityRendererDispatcher.instance.setSpecialRenderer(TileEntityPaper.class, new PaperRenderer());
         TileEntityRendererDispatcher.instance.setSpecialRenderer(TileEntityPrinter.class, new PrinterRenderer());

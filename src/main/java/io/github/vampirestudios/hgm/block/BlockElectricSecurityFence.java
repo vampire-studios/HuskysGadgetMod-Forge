@@ -1,6 +1,5 @@
 package io.github.vampirestudios.hgm.block;
 
-import io.github.vampirestudios.hgm.HuskysGadgetMod;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.FenceBlock;
@@ -25,7 +24,6 @@ public class BlockElectricSecurityFence extends FenceBlock {
 
     public BlockElectricSecurityFence() {
         super(Properties.create(Material.IRON).lightValue(2).sound(SoundType.ANVIL).hardnessAndResistance(1.0F));
-        this.setRegistryName(HuskysGadgetMod.MOD_ID, "electric_fence");
     }
 
     @Override

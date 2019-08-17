@@ -1,12 +1,10 @@
 package io.github.vampirestudios.hgm.block;
 
-import io.github.vampirestudios.hgm.HuskysGadgetMod;
 import net.minecraft.block.ContainerBlock;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.item.DyeColor;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.IBlockReader;
 
@@ -20,7 +18,6 @@ public abstract class BlockColoredModContainer extends ContainerBlock implements
     public BlockColoredModContainer(String name, DyeColor color) {
         super(Properties.create(Material.ROCK));
         this.color = color;
-        this.setRegistryName(new ResourceLocation(HuskysGadgetMod.MOD_ID, name + "_" + color.getName()));
     }
 
     @Override

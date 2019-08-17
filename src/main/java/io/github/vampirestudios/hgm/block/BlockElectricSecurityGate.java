@@ -1,6 +1,5 @@
 package io.github.vampirestudios.hgm.block;
 
-import io.github.vampirestudios.hgm.HuskysGadgetMod;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.DoorBlock;
 import net.minecraft.block.material.Material;
@@ -10,7 +9,6 @@ import net.minecraft.entity.item.ItemEntity;
 import net.minecraft.entity.monster.CreeperEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.particles.ParticleTypes;
-import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
@@ -19,7 +17,6 @@ import net.minecraft.world.World;
 public class BlockElectricSecurityGate extends DoorBlock {
     public BlockElectricSecurityGate() {
         super(Properties.create(Material.IRON).hardnessAndResistance(1.0F).lightValue(2));
-        this.setRegistryName(new ResourceLocation(HuskysGadgetMod.MOD_ID, "laser_gate"));
     }
 
     @Override

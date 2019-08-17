@@ -15,8 +15,8 @@ import net.minecraft.world.World;
 public abstract class BlockFacing extends BlockModContainer {
     public static final DirectionProperty FACING = BlockStateProperties.HORIZONTAL_FACING;
 
-    public BlockFacing(String name, Material materialIn) {
-        super(name, materialIn);
+    public BlockFacing(Material materialIn) {
+        super(materialIn);
         this.setDefaultState(this.getDefaultState().with(FACING, Direction.NORTH));
     }
 

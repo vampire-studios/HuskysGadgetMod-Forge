@@ -35,7 +35,7 @@ public class BlockPaper extends BlockFacing {
     private static final AxisAlignedBB[] SELECTION_BOUNDING_BOX = {SELECTION_BOX_SOUTH, SELECTION_BOX_WEST, SELECTION_BOX_NORTH, SELECTION_BOX_EAST};
 
     public BlockPaper() {
-        super("paper", Material.WOOL);
+        super(Material.WOOL);
     }
 
     @Override
